@@ -1,19 +1,19 @@
 import React, { Component } from "react";
+import { Route, NavLink, HashRouter } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
+import AppRouter from "./AppRouter";
 
 class App extends Component {
   render() {
     return (
-        <div className="App">
-          <h1>A Simple SPA made using React</h1>
-          <ul className="header">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/contact">Contact</a></li>
-          </ul>
-          <div className="pageContent">
-
-          </div>
+      <>
+        <Header className="Header" />
+        <div className="Container">
+          <AppRouter />
         </div>
+        <Footer className="Footer" />
+      </>
     );
   }
 }
