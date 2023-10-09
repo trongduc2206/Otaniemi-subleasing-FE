@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../styles/createOffer.css';
 
 class Create extends Component {
     render() {

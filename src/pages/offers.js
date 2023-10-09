@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
+import '../styles/offers.css';
 
 class Offers extends Component {
     render() {
