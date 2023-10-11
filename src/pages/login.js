@@ -31,9 +31,11 @@ class Login extends Component {
       user.password = this.state.password;
     
     axios.post(`${baseURL}/api/auth/login`, user).then((response) => {
-      if(response.status === "200") //error is the error object you can get from the axios call
+      
+      if(response.status == "200" && response.data.status.code == "success" ){
         this.setState({auth: "yes"});
-      else { 
+        console.log("1", this.state.auth)
+      } else { 
         this.setState({error: response.message})
       }
     }).catch((error) => {
