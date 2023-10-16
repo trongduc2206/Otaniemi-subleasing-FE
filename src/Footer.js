@@ -5,8 +5,9 @@ class Footer extends Component {
     render() {
       return (
         <>
-          <div className="nav">
-            basic footer info?
+          <div className="footer">
+          Otaniemi Sublease, 2023
+          All Rights Reserved.
           </div>
         </>
       );

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { Button } from "antd";
+import logo from './catLogo.png';
+import plusIcon from './plusIcon.svg';
 import './Header.css';
 
 class Header extends Component {
@@ -8,15 +11,31 @@ class Header extends Component {
             <>
                 <div className="header">
                     <nav className="menu">
-                        <div className="logo">
-                            logo!
+                        <Link to='/'>
+                            <div className="logo">
+                                <img src={logo} />
+                                <div className="logoTextWrapper">
+                                    <div className="upperLogoText">Otaniemi</div>
+                                    <div className="lowerLogoText">Subleasing</div>
+                                </div>
+                            </div>
+                        </Link>
+                        <div className="mainButtonContainer">
+                            <Button className="primaryButton">Filter Results</Button>
+                            <Button>Newest First</Button>
                         </div>
-                        <Link to='/item'>Item</Link>
-                        <Link to='/create'>add offer</Link>
-                        <Link to='/about'>about</Link>
-                        <Link to='/profile'>profile</Link>
-                        <Link to='/create'>add offer</Link>
-                        <Link to='/login'>login</Link>
+                        <div className="rightSideNav">
+                            <Link to='/create'>
+                                <div className="sublease">
+                                    <div className="plusIcon">
+                                        <img src={plusIcon} />
+                                    </div>
+                                    <div>Sublease</div>
+                                </div>
+                            </Link>
+                            <Link to='/about'>About</Link>
+                            <Link to='/login'>Login</Link>
+                        </div>
                     </nav>        
                 </div>
             </>
