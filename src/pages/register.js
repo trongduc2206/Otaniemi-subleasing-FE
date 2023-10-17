@@ -19,14 +19,13 @@ import {
   SearchOutlined,
 } from "@ant-design/icons";
 import '../styles/register.css';
-import zoomSVG from "../styles/img/zoom-svgrepo-com.svg";
 
 const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 const { Option } = Select;
 
-const archive = () => (
-  <img src={zoomSVG} />
-);
+// const archive = () => (
+//   <img src={zoomSVG} />
+// );
 
 const formItemLayout = {
   labelCol: {

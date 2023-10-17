@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Button } from "antd";
+import './Header.css';
 import logo from './catLogo.png';
 import plusIcon from './plusIcon.svg';
-import './Header.css';
+import avatar from "./styles/img/avatar.svg";
 
 class Header extends Component {
     render() {
@@ -38,15 +39,29 @@ class Header extends Component {
                             {
                                 currentUser ?
                                     <div>
-                                    <Link>{currentUser.username}</Link>
-                                    <Link onClick={() => {
-                                        console.log("logout");
-                                        localStorage.removeItem("user");
-                                        window.location.replace("/");
-
-                                    } }> Logout </Link>
+                                        <div className="profile">
+                                            <div className="dropdown">
+                                                <div className="profileIcon">
+                                                    {currentUser.username.charAt(0)}
+                                                </div>
+                                                <div class="dropdown-content">
+                                                    <Link className="profileLinks" onClick={() => {
+                                                        console.log("logout");
+                                                        localStorage.removeItem("user");
+                                                        window.location.replace("/");
+                                                    } }> Profile </Link>
+                                                    <Link className="profileLinks" onClick={() => {
+                                                        console.log("logout");
+                                                        localStorage.removeItem("user");
+                                                        window.location.replace("/");
+                                                    } }> Logout </Link>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    :<Link to='/login'>Login</Link>
+                                    : <div className="avatar">
+                                        <Link to='/login'><img src={avatar} /></Link>
+                                    </div>
                             }
 
                         </div>
