@@ -60,7 +60,7 @@ class Header extends Component {
                                         </div>
                                     </div>
                                     : <div className="avatar">
-                                        <Link to='/login'><img src={avatar} /></Link>
+                                        <Link to='/login'>Log in</Link>
                                     </div>
                             }
 
