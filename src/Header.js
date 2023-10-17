@@ -7,6 +7,7 @@ import './Header.css';
 
 class Header extends Component {
     render() {
+        const currentUser = JSON.parse(localStorage.getItem('user'));
         return (
             <>
                 <div className="header">
@@ -34,7 +35,20 @@ class Header extends Component {
                                 </div>
                             </Link>
                             <Link to='/about'>About</Link>
-                            <Link to='/login'>Login</Link>
+                            {
+                                currentUser ?
+                                    <div>
+                                    <Link>{currentUser.username}</Link>
+                                    <Link onClick={() => {
+                                        console.log("logout");
+                                        localStorage.removeItem("user");
+                                        window.location.replace("/");
+
+                                    } }> Logout </Link>
+                                    </div>
+                                    :<Link to='/login'>Login</Link>
+                            }
+
                         </div>
                     </nav>        
                 </div>

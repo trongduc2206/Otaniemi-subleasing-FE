@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import '../styles/login.css';
+import {notification} from 'antd'
 
 const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 
@@ -34,13 +35,24 @@ class Login extends Component {
       
       if(response.status == "200" && response.data.status.code == "success" ){
         this.setState({auth: "yes"});
-        console.log("1", this.state.auth)
+        console.log("1", this.state.auth);
+        localStorage.setItem("user", JSON.stringify(response.data.data))
+        window.location.replace("/")
       } else { 
         this.setState({error: response.message})
+        notification.error({
+          message: 'Wrong username or password',
+          description: response.data.status.message
+        })
       }
     }).catch((error) => {
         this.setState({error: error.response})
-        console.log(this.state.error);
+      console.log(error)
+        // console.log(this.state.error);
+      notification.error({
+        message: 'Login Failed',
+        description: error.response.data.status.message
+      })
       }
     );
   }
