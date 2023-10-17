@@ -12,6 +12,7 @@ import {
   InputNumber,
   Row,
   Select,
+  notification,
 } from 'antd';
 import Icon from '@ant-design/icons';
 import {
@@ -88,13 +89,19 @@ class Register extends Component {
     axios.post(`${baseURL}/api/auth/signup`, user).then((response) => {
       if(response.status == "200" && response.data.status.code == "success" ){
         console.log("1", this.state.auth)
+        window.location.replace("/login")
       } else { 
         this.setState({error: response.message})
       }
     }).catch((error) => {
-        this.setState({error: error.response})
-        console.log(this.state.error);
-      }
+      this.setState({error: error.response})
+    console.log(error)
+      // console.log(this.state.error);
+    notification.error({
+      message: 'Login Failed',
+      description: error.response.data.status.message
+    })
+    }
     );
   };
 
