@@ -1,0 +1,11 @@
+.frontPageMainContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #F0F9FF;
+    min-height: 40rem;
+    padding-top: 23px;
+    padding-left: 23px;
+    padding-right: 23px;
+    gap: 16px;
+}
