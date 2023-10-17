@@ -1,7 +1,76 @@
-.agreement {
-    background-color: aqua;
+
+.registerPageMainContainer {
+    display: flex;
+    justify-content: center;
+    background-color: #F0F9FF;
+    min-height: 40rem;
+    padding-top: 20px;
+    padding-bottom: 23px;
+    gap: 16px;
 }
-.zoomSVG img {
+
+.register-form {
+    min-width: 40rem;
+    display: flex;
+    justify-content: center;
+    background-color: #F0F9FF;
+    min-height: 40rem;
+    padding-bottom: 20px;
+}
+
+.ant-form-item{
+    margin-bottom: 22px;
+}
+.title {
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    padding-bottom: 15px;
+}
+.input, .check {
+    display: flex;
+    justify-content: center;
+    min-width: 300px;
+    min-height: 20px;
+}
+
+.check {
+    text-align: center;
+    padding-left: 0px;
+}
+.agreement{
+    margin-bottom: 10px;
+}
+#register_agreement_help {
+    min-width: 300px;
+    text-align: center;
+}
+.ant-col-xs-24 {
+    margin:0px;
+}
+.ant-form-item-control-input{
     height: 10px;
-    width: 10px;
+}
+.registrationButton {
+    min-width: 300px;
+    display: flex;
+    justify-content: center;
+}
+
+.button {
+    background-color: #ff3377;
+    border-width: 0px;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 150px;
+    height: 30px;
+    padding-bottom: 32px;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 30px;
 }
