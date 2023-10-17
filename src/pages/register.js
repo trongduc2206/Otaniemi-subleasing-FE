@@ -13,10 +13,19 @@ import {
   Row,
   Select,
 } from 'antd';
+import Icon from '@ant-design/icons';
+import {
+  SearchOutlined,
+} from "@ant-design/icons";
 import '../styles/register.css';
+import zoomSVG from "../styles/img/zoom-svgrepo-com.svg";
 
 const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 const { Option } = Select;
+
+const archive = () => (
+  <img src={zoomSVG} />
+);
 
 const formItemLayout = {
   labelCol: {
@@ -118,127 +127,133 @@ class Register extends Component {
   render() {
     return (
       <>
-        <Form
-        {...formItemLayout}
-        form={this.form}
-        name="register"
-        onFinish={this.onFinish}
-        initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
-        style={{ maxWidth: 600 }}
-        scrollToFirstError
-        >
-        <Form.Item
-          name="email"
-          label="E-mail"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
+        <div className="registerPageMainContainer">
 
-        <Form.Item
-          name="password"
-          label="Password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-          hasFeedback
-        >
-          <Input.Password />
-        </Form.Item>
+          <div className="register-form">
+            <Form
+            {...formItemLayout}
+            form={this.form}
+            name="register"
+            onFinish={this.onFinish}
+            initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
+            style={{ maxWidth: 600 }}
+            scrollToFirstError
+            >
+            <div className="formElement loginTitle">
+              <span className="title">Register</span>
+            </div>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  type: 'email',
+                  message: 'The input is not valid E-mail!',
+                },
+                {
+                  required: true,
+                  message: 'Please input your E-mail!',
+                },
+              ]}
+            >
+              <Input className="input" placeholder="E-mail"/>
+            </Form.Item>
 
-        <Form.Item
-          name="confirm"
-          label="Confirm Password"
-          dependencies={['password']}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: 'Please confirm your password!',
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-                return Promise.reject(new Error('The new password that you entered do not match!'));
-              },
-            }),
-          ]}
-        >
-          <Input.Password />
-        </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your password!',
+                },
+              ]}
+              hasFeedback
+            >
+              <Input.Password className="input" placeholder="Password" />
+            </Form.Item>
 
-        <Form.Item
-          name="username"
-          label="Username"
-          tooltip="What do you want others to call you?"
-          rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
-        >
-          <Input />
-        </Form.Item>
+            <Form.Item
+              name="confirm"
+              dependencies={['password']}
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: 'Please confirm your password!',
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(new Error('The new password that you entered do not match!'));
+                  },
+                }),
+              ]}
+            >
+              <Input.Password className="input" placeholder="Confirm Password"/>
+            </Form.Item>
 
-        <Form.Item
-          name="fullName"
-          label="Fullname"
-          tooltip="For example: John Doe"
-          rules={[{ required: true, message: 'Please input your fullname!', whitespace: true }]}
-        >
-          <Input />
-        </Form.Item>
+            <Form.Item
+              name="username"
+              tooltip="What do you want others to call you?"
+              rules={[{ required: true, message: 'Please input your nickname!', whitespace: true }]}
+            >
+              <Input className="input" placeholder="Username"/>
+            </Form.Item>
+
+            <Form.Item
+              name="fullName"
+              tooltip="For example: John Doe"
+              rules={[{ required: true, message: 'Please input your fullname!', whitespace: true }]}
+            >
+              <Input className="input" placeholder="Fullname"/>
+            </Form.Item>
 
 
-        {/* <Form.Item label="Captcha" extra="We must make sure that your are a human.">
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name="captcha"
-                noStyle
-                rules={[{ required: true, message: 'Please input the captcha you got!' }]}
-              >
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Button>Get captcha</Button>
-            </Col>
-          </Row>
-        </Form.Item> */}
+            {/* <Form.Item label="Captcha" extra="We must make sure that your are a human.">
+              <Row gutter={8}>
+                <Col span={12}>
+                  <Form.Item
+                    name="captcha"
+                    noStyle
+                    rules={[{ required: true, message: 'Please input the captcha you got!' }]}
+                  >
+                    <Input />
+                  </Form.Item>
+                </Col>
+                <Col span={12}>
+                  <Button>Get captcha</Button>
+                </Col>
+              </Row>
+            </Form.Item> */}
 
-        <Form.Item
-          name="agreement"
-          valuePropName="checked"
-          className="agreement"
-          rules={[
-            {
-              validator: (_, value) =>
-                value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
-            },
-          ]}
-          {...tailFormItemLayout}
-        >
-          <Checkbox>
-            I have read the <a href="">agreement</a>
-          </Checkbox>
-        </Form.Item>
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+            <Form.Item
+              name="agreement"
+              valuePropName="checked"
+              className="agreement"
+              rules={[
+                {
+                  validator: (_, value) =>
+                    value ? Promise.resolve() : Promise.reject(new Error('Should accept agreement')),
+                },
+              ]}
+              {...tailFormItemLayout}
+            >
+              <Checkbox className="check">
+                I have read the <a href="">agreement</a>
+              </Checkbox>
+            </Form.Item>
+            
+            <Form.Item {...tailFormItemLayout}>
+              <div className="registrationButton">
+                <Button className="button" type="primary" htmlType="submit">
+                  Register
+                </Button>
+              </div>
+            </Form.Item>
+          </Form>
+        </div>
+        </div>
       </>
     );
   };

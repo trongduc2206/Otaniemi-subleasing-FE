@@ -1,3 +1,91 @@
-.username {
-    background-color: aqua;
+* {
+    margin: 0px;
+    padding-inline: 0px;
+    padding: 0px;
+    font-family: inherit;
+}
+
+.loginPageMainContainer {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #F0F9FF;
+    min-height: 40rem;
+    padding-top: 23px;
+    padding-left: 23px;
+    padding-right: 23px;
+    gap: 16px;
+}
+
+.formContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #F0F9FF;
+    min-height: 40rem;
+    padding-top: 23px;
+    padding-left: 23px;
+    padding-right: 23px;
+    gap: 16px;
+}
+.formElement {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    background-color: #F0F9FF;
+    gap: 16px;
+}
+.loginTitle{
+    display: flex;
+    justify-content: center;
+}
+.title {
+    text-align: center;
+    font-family: Helvetica;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    padding-bottom: 15px;
+}
+
+.loginButton, .linkToRegistration {
+    justify-content: center;
+}
+
+.input{
+    min-width: 283px;
+    min-height: 30px;
+}
+
+.button {
+    background-color: #ff3377;
+    border-width: 0px;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 150px;
+    height: 30px;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 30px; /* 150% */
+}
+
+.button:hover {
+    background-color: #33AAFF;  
+}
+
+.linkToRegistration {
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 30px;
+    color: #33AAFF;
+}
+
+.link {
+    color: #33AAFF;
 }
