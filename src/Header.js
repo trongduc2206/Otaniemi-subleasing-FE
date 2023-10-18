@@ -4,7 +4,7 @@ import { Button } from "antd";
 import './Header.css';
 import logo from './catLogo.png';
 import plusIcon from './plusIcon.svg';
-import avatar from "./styles/img/avatar.svg";
+
 
 class Header extends Component {
     render() {
@@ -59,7 +59,7 @@ class Header extends Component {
                                             </div>
                                         </div>
                                     </div>
-                                    : <div className="avatar">
+                                    : <div className="logInButton">
                                         <Link to='/login'>Log in</Link>
                                     </div>
                             }

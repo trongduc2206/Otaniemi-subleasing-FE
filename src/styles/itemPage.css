@@ -1,6 +1,7 @@
 .itemPageContainer {
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     background-color: #fff0f5;
     padding-top: 32px;
@@ -10,13 +11,197 @@
 
 .itemPageCard {
     background-color: #ffffff;
-    width: 1440px;
+    display: flex;
+    justify-content: center;
 }
 
 .itemPageContent {
-    width: 932px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 900px;
     padding-left: 16px;
-    padding-right: 16 px;
+    padding-right: 16px;
     padding-top: 46px;
     padding-bottom: 46px;
+}
+
+.itemPageHeaderSection{
+    width: 900px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 15px;
+}
+
+.itemNameBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px;
+}
+
+.name{
+    font-size: 24px;
+}
+.actionsBox {
+    width: 20rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.action{
+    padding: 10px;
+    font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px;
+}
+
+.itemImgCarousel{
+    border-image: fill;
+    width: 900px;
+    height: 600px;
+    display: block;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.itemPageSubSubContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+.landlordAndAction{
+    width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 25px;
+}
+
+.landlordInfo {
+    width: 160px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.landlordImg img {
+    padding-top: 2px;
+    width: 45px;
+}
+
+.landlordNameCheck{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.contactAction{
+    margin: auto 0px auto 0px;
+    background-color: #ff3377;
+    border-radius: 4px;
+    color: #ffffff;
+    padding: 10px;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px;
+}
+
+.information{
+    width: 900px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.description{
+    width: 600px;
+}
+.description h3 {
+    padding-bottom: 15px;
+}
+.valuesBox{
+    min-width: 220px;
+    min-height: 220px;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.2);
+}
+.values{
+    padding: 15px 10px 10px 10px;
+    min-width: 200px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.price{
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid #1A1A1A;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 500;
+line-height: 24px;
+}
+.priceValue{
+    font-size: 28px;
+    font-weight: 700;
+}
+.apartmentValues{
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 1px solid #1A1A1A;
+}
+.rentTerms{
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 1px solid #1A1A1A;
+}
+.posted{
+    height: 30px;
+}
+
+.apartmentSpec{
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.specTitle{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+}
+
+.specList{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+}
+
+.specBox{
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-right: 25px;
 }
