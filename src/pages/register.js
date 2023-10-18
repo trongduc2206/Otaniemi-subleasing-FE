@@ -88,6 +88,10 @@ class Register extends Component {
     axios.post(`${baseURL}/api/auth/signup`, user).then((response) => {
       if(response.status == "200" && response.data.status.code == "success" ){
         console.log("1", this.state.auth)
+        notification.success({
+          message: 'Register Successfully',
+          description: 'Login with your account'
+        })
         window.location.replace("/login")
       } else { 
         this.setState({error: response.message})
@@ -97,7 +101,7 @@ class Register extends Component {
     console.log(error)
       // console.log(this.state.error);
     notification.error({
-      message: 'Login Failed',
+      message: 'Register Failed',
       description: error.response.data.status.message
     })
     }
