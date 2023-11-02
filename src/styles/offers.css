@@ -1,5 +1,5 @@
 .frontPageMainContainer {
-    display: flex;
+    display:  flex;
     flex-wrap: wrap;
     justify-content: center;
     background-color: #F0F9FF;
@@ -9,4 +9,101 @@
     padding-right: 23px;
     padding-bottom: 23px;
     gap: 16px;
+}
+
+.Offer-Card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 16px;
+    width: 300px;
+    min-height: 300px;
+    max-height: 350px;
+    background-color: #FFFFFF;
+    border: 1px solid #D9D9D9;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.offerContent {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-left: 11px;
+    padding-right: 11px;
+}
+
+.locationAndPrice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: #1A1A1A;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 150% */
+    
+}
+
+.billingPeriod {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    color: #4D4D4D;
+    font-family: Helvetica;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 16px; /* 133.333% */
+}
+
+.addressAndType {
+    height: 48px;
+    color: #4D4D4D;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
+
+.availabilityAndTimeStamp {
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+
+}
+
+.availability {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.availableWrapper {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.available {
+    background-color: #5ad365;
+    height: 12px;
+    width: 12px;
+    border-radius: 100%;
+}
+
+.timeStamp {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
 }

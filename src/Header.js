@@ -44,7 +44,7 @@ class Header extends Component {
                                                 <div className="profileIcon">
                                                     {currentUser.username.charAt(0)}
                                                 </div>
-                                                <div class="dropdown-content">
+                                                <div className="dropdown-content">
                                                     <Link className="profileLinks" onClick={() => {
                                                         console.log("logout");
                                                         localStorage.removeItem("user");

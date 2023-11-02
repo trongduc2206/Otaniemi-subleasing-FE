@@ -48,7 +48,6 @@ class Login extends Component {
     }).catch((error) => {
         this.setState({error: error.response})
       console.log(error)
-        // console.log(this.state.error);
       notification.error({
         message: 'Login Failed',
         description: error.response.data.status.message

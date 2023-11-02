@@ -23,10 +23,6 @@ import '../styles/register.css';
 const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 const { Option } = Select;
 
-// const archive = () => (
-//   <img src={zoomSVG} />
-// );
-
 const formItemLayout = {
   labelCol: {
     xs: { span: 24 },
