@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from "../Header";
 import '../styles/itemPage.css';
 import mainImage from './image 4.png';
 import geo from "../styles/img/geo.svg";
@@ -17,6 +18,7 @@ class Item extends Component {
     render() {
       return (
         <>
+          <Header className="Header"/> 
           <div className="itemPageMainContainer">
             <div className="itemPageCard">
               <div className="itemPageContent">

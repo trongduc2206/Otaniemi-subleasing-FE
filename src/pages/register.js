@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
+import Header from "../Header";
+import {RequestGet, RequestPost} from './services/apiRequest.js';
 import { Link } from 'react-router-dom';
-import axios from "axios";
 import {
   AutoComplete,
   Button,
@@ -12,7 +13,6 @@ import {
   InputNumber,
   Row,
   Select,
-  notification,
 } from 'antd';
 import Icon from '@ant-design/icons';
 import {
@@ -20,7 +20,6 @@ import {
 } from "@ant-design/icons";
 import '../styles/register.css';
 
-const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 const { Option } = Select;
 
 const formItemLayout = {
@@ -80,28 +79,7 @@ class Register extends Component {
       user.password = values.password; 
       user.fullName = values.fullName;
       
-    console.log('Received values of form: ', values)
-    axios.post(`${baseURL}/api/auth/signup`, user).then((response) => {
-      if(response.status == "200" && response.data.status.code == "success" ){
-        console.log("1", this.state.auth)
-        notification.success({
-          message: 'Register Successfully',
-          description: 'Login with your account'
-        })
-        window.location.replace("/login")
-      } else { 
-        this.setState({error: response.message})
-      }
-    }).catch((error) => {
-      this.setState({error: error.response})
-    console.log(error)
-      // console.log(this.state.error);
-    notification.error({
-      message: 'Register Failed',
-      description: error.response.data.status.message
-    })
-    }
-    );
+      RequestPost("/api/auth/signup", user, false, "/login")
   };
 
   prefixSelector() {
@@ -133,6 +111,7 @@ class Register extends Component {
   render() {
     return (
       <>
+        <Header className="Header"/> 
         <div className="registerPageMainContainer">
 
           <div className="register-form">
@@ -141,7 +120,7 @@ class Register extends Component {
             form={this.form}
             name="register"
             onFinish={this.onFinish}
-            initialValues={{ residence: ['zhejiang', 'hangzhou', 'xihu'], prefix: '86' }}
+            initialValues={{ prefix: '86' }}
             style={{ maxWidth: 600 }}
             scrollToFirstError
             >
