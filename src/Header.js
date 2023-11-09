@@ -5,10 +5,13 @@ import './Header.css';
 import logo from './catLogo.png';
 import plusIcon from './plusIcon.svg';
 
-
 class Header extends Component {
     render() {
-        const currentUser = JSON.parse(localStorage.getItem('user'));
+        let currentUser = ""
+        // console.log(localStorage.getItem('user'))
+            if(localStorage.getItem('user') !== undefined) {
+                currentUser = JSON.parse(localStorage.getItem('user'));
+            }
         return (
             <>
                 <div className="header">
@@ -23,8 +26,13 @@ class Header extends Component {
                             </div>
                         </Link>
                         <div className="mainButtonContainer">
-                            <Button className="primaryButton">Filter Results</Button>
-                            <Button>Newest First</Button>
+                            {this.props.main ?
+                                <>
+                                    <Button className="primaryButton" onClick={this.props.showModal}>Filter Results</Button>
+                                    <Button>Newest First</Button>
+                                </>
+                                : <></>
+                            }
                         </div>
                         <div className="rightSideNav">
                             <Link to='/create'>
@@ -36,8 +44,7 @@ class Header extends Component {
                                 </div>
                             </Link>
                             <Link to='/about'>About</Link>
-                            {
-                                currentUser ?
+                            {currentUser ?
                                     <div>
                                         <div className="profile">
                                             <div className="dropdown">

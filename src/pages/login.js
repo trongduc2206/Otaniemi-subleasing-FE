@@ -1,10 +1,8 @@
 import React, { Component } from "react";
+import Header from "../Header";
 import { Link } from 'react-router-dom';
-import axios from "axios";
+import {RequestGet, RequestPost} from './services/apiRequest.js';
 import '../styles/login.css';
-import {notification} from 'antd'
-
-const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 
 class Login extends Component {
   constructor(props) {
@@ -26,41 +24,19 @@ class Login extends Component {
   }
 
   handleSubmit(event) {
-    event.preventDefault() 
+    event.preventDefault();
     const user = {};
       user.username = this.state.username; 
       user.password = this.state.password;
-    
-    axios.post(`${baseURL}/api/auth/login`, user).then((response) => {
-      
-      if(response.status == "200" && response.data.status.code == "success" ){
-        this.setState({auth: "yes"});
-        console.log("1", this.state.auth);
-        localStorage.setItem("user", JSON.stringify(response.data.data))
-        window.location.replace("/")
-      } else { 
-        this.setState({error: response.message})
-        notification.error({
-          message: 'Wrong username or password',
-          description: response.data.status.message
-        })
-      }
-    }).catch((error) => {
-        this.setState({error: error.response})
-      console.log(error)
-      notification.error({
-        message: 'Login Failed',
-        description: error.response.data.status.message
-      })
-      }
-    );
+      let response = RequestPost("/api/auth/login", user, "user", "/") 
+      this.setState({auth: response})
   }
 
   render() {
     return (
       <>
+      <Header className="Header"/> 
       <div className="loginPageMainContainer">
-        
         <div className="formContainer">
           <form onSubmit={this.handleSubmit}>
             <div className="formElement loginTitle">
@@ -76,7 +52,7 @@ class Login extends Component {
               <button  className="button" type="submit">Log In</button>
             </div>
             <div className="formElement linkToRegistration">
-              <Link className="link" to='/register'>Not registered yet.</Link>
+              <Link className="link" to='/register'>Not registered yet?</Link>
             </div>
           </form>
         </div>

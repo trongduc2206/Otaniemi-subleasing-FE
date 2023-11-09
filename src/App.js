@@ -7,11 +7,10 @@ import AppRouter from "./AppRouter";
 class App extends Component {
   render() {
     return (
-      <>
-        <Header className="Header" />
-        <div className="Container">
-          <AppRouter />
-        </div>
+      <>      
+          <div className="Container">
+            <AppRouter />
+          </div>
         <Footer className="Footer" />
       </>
     );

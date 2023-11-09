@@ -1,244 +1,230 @@
 import React, { Component, useState, useEffect } from "react";
+import OfferCard from "./offerCard";
+import Header from "../Header";
+import {RequestGet, RequestPost} from './services/apiRequest.js';
 import { Link } from 'react-router-dom';
-import axios from "axios";
 import {
     Button,
-    notification,
+    Modal,
+    Slider,
+    Pagination,
   } from 'antd';
+import {
+    CloseOutlined,
+    SearchOutlined,
+  } from "@ant-design/icons";
 import '../styles/offers.css';
-import mainImage from './image1.png';
-import clockIcon from './clock.svg';
+import styles from '../styles/offers.css';
 
-const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
-
-function formatRelativeTime(timestamp) {
-    const currentTime = new Date();
-    const timeDifference = (currentTime - new Date(timestamp));
-    let timePos;
-    if (timeDifference <= 0) {
-        timePos = -timeDifference;
-    } else { timePos = timeDifference}
-    console.log(timePos);
-    if (!isFinite(timeDifference)) {
-        return timestamp;
-    }
-    // Convert the time difference to seconds
-    const secondsDifference = Math.floor(timeDifference / 1000);
-
-  const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-
-  if (secondsDifference < 60) {
-    return rtf.format(-secondsDifference, 'second');
-  } else if (secondsDifference < 3600) {
-    const minutesDifference = Math.floor(secondsDifference / 60);
-    return rtf.format(-minutesDifference, 'minute');
-  } else if (secondsDifference < 86400) {
-    const hoursDifference = Math.floor(secondsDifference / 3600);
-    return rtf.format(-hoursDifference, 'hour');
-  } else {
-    const daysDifference = Math.floor(secondsDifference / 86400);
-    return rtf.format(-daysDifference, 'day');
-  }
-}
-
-function formatDate(dateToFormat) {
-    // Split the input date into parts (month and day)
-        const date = new Date(dateToFormat);
-        const options = { day: 'numeric', month: 'long' };
-        const formattedDate = date.toLocaleDateString('en-US', options); 
-        const parts = formattedDate.split(' ');
-
-        if (parts.length !== 2) {
-        // Invalid input format
-        }
-
-        const month = parts[0];
-        const day = parts[1];
-
-        // Remove any commas or punctuation from the day part
-        const cleanedDay = day.replace(/\D/g, '');
-
-        // Convert the cleaned day to a number and check its value
-        const dayNumber = parseInt(cleanedDay, 10);
-
-        if (isNaN(dayNumber)) {
-        // Invalid day part
-        }
-
-        // Determine the appropriate ordinal suffix (st, nd, rd, or th) for the day
-        let ordinalSuffix;
-        if (dayNumber >= 11 && dayNumber <= 13) {
-        ordinalSuffix = 'th';
+const RadioButton = (props) =>{
+    const {name, type} = props;
+    const [nameType, setNameType] = useState(name);
+    const [apartmentType, setApartmentType] = useState(type);
+    const [isActive, setIsActive] = useState(false);
+    const [navClass, setNavClass] = useState("radioButton");
+    let valueArray = [];
+    
+    const handleClick = () => {
+        console.log(1,valueArray);
+        const localStore = JSON.parse(localStorage.getItem('filterType'));
+        console.log(1,localStore);
+        // 👇️ toggle styles on click
+        if (!isActive) {
+            setIsActive(!isActive)
+            setNavClass("radioButton selectedRadioButton")
+            valueArray = JSON.parse(localStorage.getItem('filterType'))
+            console.log(2,valueArray);
+            valueArray = valueArray.concat([apartmentType])
+            console.log(2,valueArray);
         } else {
-        switch (dayNumber % 10) {
-        case 1:
-            ordinalSuffix = 'st';
-            break;
-        case 2:
-            ordinalSuffix = 'nd';
-            break;
-        case 3:
-            ordinalSuffix = 'rd';
-            break;
-        default:
-            ordinalSuffix = 'th';
+            setIsActive(!isActive)
+            setNavClass("radioButton")
+            valueArray = JSON.parse(localStorage.getItem('filterType'))
+            console.log(3,valueArray);
+            valueArray = valueArray.filter(item => item !== apartmentType)
+            console.log(3,valueArray);
         }
-        }
-
-        // Combine the day with the ordinal suffix and the month
-        return `${dayNumber}${ordinalSuffix} ${month}`;
-    }
-
-const OfferCard = (props) => {
-    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created } = props;
-    const [apartmentPrice, setaApartmentPrice] = useState(props.monthlyPrice);
-    const [apartmentArea, setApartmentArea] = useState(props.addressArea);
-    const [apartmentStreet, setApartmentStreet] = useState(props.addressStreet);
-    const [apartmentType, setApartmentType] = useState(props.type);
-    const [apartmentFloorArea, setApartmentFloorArea] = useState(props.floorArea);
-    const [apartmentStartDate, setApartmentStartDate] = useState(props.startDate);
-    const [createdTime, setCreatedTime] = useState(props.created);
-
-    useEffect(() => {
-        setApartmentStartDate(formatDate(startDate));
-      }, [startDate]);
-    // useEffect(() => {
-    //     setCreatedTime(formatRelativeTime(createdTime))
-    // }, [createdTime]);
-
-
+        console.log(4,valueArray);
+        localStorage.setItem("filterType", JSON.stringify(valueArray))
+        console.log(4,JSON.parse(localStorage.getItem('filterType')));
+      };
     return (
-        <div className="Offer-Card">
-            <img src={mainImage} />
-            <div className="offerContent">
-                <div>
-                    <div>
-                        <div className="locationAndPrice">
-                            <div>
-                                {apartmentArea}
-                            </div>
-                            <div>
-                                {apartmentPrice}
-                            </div>
-                        </div>
-                        <div className="billingPeriod">
-                        per month
-                        </div>
-                    </div>
-                    <div>
-                        <div className="addressAndType">
-                            <div className="address">
-                                {apartmentStreet}
-                            </div>
-                            <div className="type">
-                            { apartmentType ? (
-                                apartmentType === 1 ? "Studio" : "Shared"
-                                ) : ""
-                            }
-                            {apartmentFloorArea && apartmentFloorArea !== null ?
-                                (`, ${apartmentFloorArea} m2`)
-                                : ""  
-                            }
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div className="availabilityAndTimeStamp">
-                        <div className="availability">
-                            <div className="availableWrapper">
-                                <div className="available"></div>
-                            </div>
-                            <div>
-                                {apartmentStartDate}
-                            </div>
-                        </div>
-                        <div className="timeStamp">
-                            <div>
-                                <img src={clockIcon} width="16" height="16"/>
-                            </div>
-                            <div>
-                            {formatRelativeTime(createdTime)}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                    
-                    </div>
-                </div>
-            </div>
+        <div className={navClass} onClick={handleClick}>
+                {nameType}
         </div>
-    );
-};
+    )
+}
 
 class Offers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          data: {},
-          username: "",
-          password: "",
-          error: "",
-          auth: "",
-          autoCompleteResult: [],
+            area: "",
+            maxPrice: 1000,
+            isActive: true,
+            isModalOpen: false,
+            page: 0,
+            size: 4,
+            offers: {
+                page: 0,
+                size: 4,
+            },
+            content: {},
+            rangeArray: [0, 1000],
         };
-        // let form = Form.useForm();
+        this.handleChange = this.handleChange.bind(this);
+        this.componentDidMount = this.componentDidMount.bind(this);
       }
+    
+    handleChange(event) {
+        event.preventDefault();
+        const target = event.target;
+        this.setState({[target.name]: target.value});
+    }
 
-    getOffers(){
-        const offer = {};
-        offer.page = 0;
-        offer.size = 25;
-          
-        console.log('Received values of form: ')
-        axios.get(`${baseURL}/api/offer`, { 
-            params: {
-                page: offer.page,
-                size: offer.size,
-            }}).then((response) => {
-            if(response.status == "200" && response.data.status.code == "success" ){
-                console.log(response.data.data);
-                localStorage.setItem("content", JSON.stringify(response.data.data.content))
-            } else { 
-                this.setState({error: response.message})
-                notification.error({
-                message: 'Wrong username or password',
-                description: response.data.status.message
-                })
-            }
-        }).catch((error) => {
-          console.log(this.state.error);
-          notification.error({
-          message: 'Login Failed',
-          description: error.response
-        })
-        }
-        );
-      };
+    componentDidMount() {
+        // do something
+        console.log("1")
+        RequestGet("/api/offer", this.state.offers,"content", false)
+        localStorage.setItem("filterType", JSON.stringify([]))
+    }
 
     render() {
-        this.getOffers();
-        const contentOf = JSON.parse(localStorage.getItem('content'));
-        const contentOn = [
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-            { actualPrice : 123},
-        ]
-        console.log(contentOf, contentOf[0].actualPrice, contentOf[0].apartmentType )
+        const filters = {
+            page: this.state.page,
+            size: this.state.size,
+            priceLeq: this.state.rangeArray[1],
+            priceGeq: this.state.rangeArray[0],
+        };
+        const contentOf = JSON.parse(localStorage.getItem('content'))
+        console.log("content: ", contentOf)
+        const totalElements = JSON.parse(localStorage.getItem('totalElements'));
+        let pageNumber = 0;
+
+        // const pricesArray = contentOf.map(element => element.monthlyPrice);
+        // this.state.maxPrice = Math.max(...pricesArray);
+
+        const showModal = (event) => {
+            event.preventDefault();
+            this.setState({isModalOpen: true});
+        };
+    
+        const handleOk = () => {
+            this.setState({isModalOpen: false});
+        };
+    
+        const handleCancel = (event) => {
+            event.preventDefault();
+            this.setState({isModalOpen: false});
+        };
+        
+        const onApply = (event) => {
+            const apartmentType  = JSON.parse(localStorage.getItem('filterType')).toString();
+            pageNumber = 0;
+            filters.page = 0; 
+            filters.priceLeq = this.state.rangeArray[1];
+            filters.priceGeq = this.state.rangeArray[0];
+            if(this.state.area !== ""){
+                filters.area= this.state.area
+            }
+            if(apartmentType !== ""){
+                filters.apartmentType = apartmentType;
+            }
+            console.log(filters)
+            RequestGet("/api/offer/filter", filters,"content", false)
+            this.setState({content: JSON.parse(localStorage.getItem('content'))})
+        };
+        
+        const onPageChange = (event) => {
+            const apartmentType  = JSON.parse(localStorage.getItem('filterType')).toString();
+            pageNumber = event;
+            console.log("pageNumber: ", pageNumber)
+            filters.page = pageNumber-1;
+            filters.priceLeq = this.state.rangeArray[1];
+            filters.priceGeq = this.state.rangeArray[0];
+
+            if(this.state.area !== ""){
+                filters.area= this.state.area
+            }
+            if(apartmentType !== ""){
+                filters.apartmentType = apartmentType;
+            }
+            RequestGet("/api/offer/filter", filters,"content", false)
+            this.setState({content: JSON.parse(localStorage.getItem('content'))})
+        }
+
+        // const totalElements= (event) => {
+        //     event.preventDefault();
+        //     this.setState({totalElements: JSON.parse(localStorage.getItem('totalElements'))})
+        //     const totalElements = this.state.totalElements;
+        //     return totalElements
+        // }
         
       return (
-        <>
-          <div className="frontPageMainContainer">
-            { contentOf ? (
+          <>
+          <Header className="Header" main={true} showModal={showModal}/> 
+          <div className="frontPageMainContainer"> 
+            <div className="wrapCardContainer">
+                <Modal open={this.state.isModalOpen} onOk={handleOk} onCancel={handleCancel} width={730}>
+                    <div className="filteringContainer">
+                        <div className="filteringWindow">
+                        <form onSubmit={onApply}>
+                            <div className="filteringWidnowTitle">
+                                <div className="placeholderAndClose">
+                                    <div className="placeholder">
+                                        <SearchOutlined /> Search for an Apartment
+                                    </div>
+                                </div>
+                                <div className="horisontalLine">
+                                    <hr color="#D9D9D9"/>  
+                                </div>
+                            </div>
+                            <div className="locationSearch">
+                                <div className="searchTitle">
+                                    Location
+                                </div>
+                                <div className="filterfFormElement">
+                                    <input className="input" placeholder="Location, City, Area" name="area" type="text" value={this.state.username} onChange={this.handleChange} />
+                                    <div className="horisontalLine">
+                                        <hr color="#D9D9D9"/>  
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="typeSearch">
+                                <div className="searchTitle">
+                                    Type
+                                </div>
+                                <div className="apartmentSelector">
+                                    <RadioButton name="Single Room Apartment" type={1} />
+                                    <RadioButton name="Double Room Apartment" type={2} />
+                                    <RadioButton name="Room in a shared Apartment" type={3} />
+                                    <RadioButton name="Studio" type={4} />
+                                </div>
+                                <div className="horisontalLine">
+                                    <hr color="#D9D9D9"/>
+                                </div>
+                            </div>
+                            <div className="priceSearch">
+                                <div className="searchTitle">
+                                    Price
+                                </div>
+                                <div className="filterfFormElement">
+                                <Slider range className={styles.filterSlider} onAfterChange={(value) => {this.setState({rangeArray: value}) }} defaultValue={[0, this.state.maxPrice]} max={this.state.maxPrice} min={0} />
+                                    <div className="horisontalLine">
+                                        <hr color="#D9D9D9"/>  
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="filterfFormElement filterButton">
+                                <button  className="button" type="submit">Apply</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </Modal>
+                
+                <div className="cardContainer">
+                { contentOf ? (
                     contentOf.map((object) => {
                         return (<OfferCard
                             key={object.offerId}
@@ -249,11 +235,16 @@ class Offers extends Component {
                             floorArea={object.apartmentFloorArea}
                             startDate={object.startDate}
                             created={object.createdTime}
-                        />)
-                    })
-                )
-                : (<div className=""></div>)
-            }           
+                            />)
+                        })
+                        )
+                        : (<></>)
+                }    
+                </div>       
+            </div>
+            <div className="pagination">
+                <Pagination defaultCurrent={1} total={totalElements} pageSize={this.state.size} onChange={onPageChange} />
+            </div>
           </div>
         </>
         );
