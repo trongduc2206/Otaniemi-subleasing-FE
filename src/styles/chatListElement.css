@@ -14,6 +14,10 @@
     line-height: 24px;
 }
 
+.chatListElement:hover {
+    background-color: #f2f2f2;
+}
+
 .picture {
     box-sizing: border-box;
     padding: 0px;
@@ -54,8 +58,16 @@
     visibility: visible;
 }
 
+.hover {
+    background-color: #f2f2f2;
+}
+
 .selected {
     background-color: #33aaff;
     color: #ffffff;
     font-weight: 700;
+}
+
+.selected:hover {
+    background-color: #33aaff;
 }
