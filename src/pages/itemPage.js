@@ -4,6 +4,8 @@ import '../styles/itemPage.css';
 import mainImage from './image 4.png';
 import geo from "../styles/img/geo.svg";
 import avatar from "../styles/img/avatar.svg";
+import { Button } from "antd";
+import { Link } from 'react-router-dom';
 import {
   ShareAltOutlined,
   HeartOutlined,
@@ -66,9 +68,9 @@ class Item extends Component {
                           </div>
                         </div>
                       </div>
-                      <div className="contactAction">
-                        Contact
-                      </div>
+                      <Link to='/chat'>
+                        <Button className="contactAction">Contact</Button>
+                      </Link>
                     </div>
                     <div className="information">
                       <div className="description">

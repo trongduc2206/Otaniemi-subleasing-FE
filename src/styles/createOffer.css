@@ -1,0 +1,73 @@
+.createOfferMainContainer {
+    display: flex;
+    justify-content: center;
+    padding-top: 78px;
+    padding-bottom: 78px;
+}
+
+.createOfferForm {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    width: 932px;
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 16px;
+}
+
+.title {
+    color: #4d4d4d;
+    font-family: Helvetica;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 48px;
+}
+
+.introduction {
+    width: 100%;
+    color: #4d4d4d;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+.dividerWrapper {
+    width: 100%;
+    padding: 16px;
+
+}
+
+.divider {
+    box-sizing: border-box;
+    width: 100%;
+    height: 1px;
+    background-color: #f2f2f2;
+
+}
+
+.formSubtitle {
+    width: 100%;
+    color: #999;
+    font-family: Helvetica;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 36px;
+}
+
+.textInput{
+    box-sizing: border-box;
+    width: 100%;
+    height: 30px;
+    padding-left: 10px;
+    border: 1px solid;
+    border-radius: 3px;
+}
+
+.textInput::placeholder {
+    color: #4d4d4d;
+}
