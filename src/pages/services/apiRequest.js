@@ -6,36 +6,26 @@ import {
 
 const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
 
-export function RequestGet(path, value, responseValueName, secondPath) {
-    console.log(path, value, responseValueName, secondPath)
+export async function RequestGet(path, value ) {
+    console.log(path, value)
 
-            axios.get(`${baseURL+path}`, {params: value,}).then((response) => {
-                console.log(response);
-                if(response.status == "200" && response.data.status.code == "success" ){
-                    if(responseValueName){
-                        if(responseValueName == "content"){
-                            console.log(response.data.data.totalElements);
-                            localStorage.setItem(`totalElements`, JSON.stringify(response.data.data.totalElements))   
-                        }
-                        localStorage.setItem(`${responseValueName}`, JSON.stringify(response.data.data.content))
-                    }
-                    if(secondPath){
-                        window.location.replace(`${secondPath}`)
-                    }
-                } else { 
-                    this.setState({error: response.status.message})
-                    notification.error({
-                    message: 'Wrong username or password',
-                    description: response.data.status.message
-                    })
-                }
-            }).catch((error) => {
-                notification.error({
-                    message: 'Login Failed',
-                    description: error.response
-                })
-            }
-            );
+    try {
+        const response = await axios.get(`${baseURL+path}`, {params: value,})
+        console.log(response);
+        if(response.status == "200" && response.data.status.code == "success" ){
+            return response.data.data;
+        } else { 
+            notification.error({
+                message: 'Wrong username or password',
+                description: response.data.status.message
+            })
+        }
+    } catch (error) {
+        notification.error({
+            message: 'Login Failed',
+            description: error.response
+        })
+    }
 };
 
 export function RequestPost(path, value, responseValueName, secondPath) {
@@ -52,6 +42,7 @@ export function RequestPost(path, value, responseValueName, secondPath) {
                 if(secondPath){
                     window.location.replace(`${secondPath}`)
                 }
+                return response.data.data
             } else {
                 console.log(1,response)
                 notification({

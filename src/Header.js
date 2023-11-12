@@ -29,7 +29,11 @@ class Header extends Component {
                             {this.props.main ?
                                 <>
                                     <Button className="primaryButton" onClick={this.props.showModal}>Filter Results</Button>
-                                    <Button>Newest First</Button>
+                                    {this.props.isSet ?
+                                        <Button onClick={this.props.onFilterClear}>Clear Filters</Button>
+                                        : <></>
+                                    }
+                                    
                                 </>
                                 : <></>
                             }

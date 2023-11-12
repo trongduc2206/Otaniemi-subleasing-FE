@@ -1,6 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import mainImage from './image1.png';
 import clockIcon from './clock.svg';
+import { Link } from 'react-router-dom';
 
 function formatRelativeTime(timestamp) {
     const currentTime = new Date();
@@ -97,65 +98,67 @@ const OfferCard = (props) => {
 
     return (
         <div className="Offer-Card">
-            <img src={mainImage} />
-            <div className="offerContent">
-                <div>
+                <Link className="link" to={`/offers/item`}>
+                <img src={mainImage} />
+                <div className="offerContent">
                     <div>
-                        <div className="locationAndPrice">
-                            <div>
-                                {apartmentArea}
+                        <div>
+                            <div className="locationAndPrice">
+                                <div>
+                                    {apartmentArea}
+                                </div>
+                                <div>
+                                    {apartmentPrice}
+                                </div>
                             </div>
-                            <div>
-                                {apartmentPrice}
+                            <div className="billingPeriod">
+                            per month
                             </div>
                         </div>
-                        <div className="billingPeriod">
-                        per month
+                        <div>
+                            <div className="addressAndType">
+                                <div className="address">
+                                    {apartmentStreet}
+                                </div>
+                                <div className="type">
+                                { apartmentType ? (
+                                    apartmentType === 1 ? "Studio" : "Shared"
+                                    ) : ""
+                                }
+                                {apartmentFloorArea && apartmentFloorArea !== null ?
+                                    (`, ${apartmentFloorArea} m2`)
+                                    : ""  
+                                }
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div>
-                        <div className="addressAndType">
-                            <div className="address">
-                                {apartmentStreet}
+                        <div className="availabilityAndTimeStamp">
+                            <div className="availability">
+                                <div className="availableWrapper">
+                                    <div className="available"></div>
+                                </div>
+                                <div>
+                                    {apartmentStartDate}
+                                </div>
                             </div>
-                            <div className="type">
-                            { apartmentType ? (
-                                apartmentType === 1 ? "Studio" : "Shared"
-                                ) : ""
-                            }
-                            {apartmentFloorArea && apartmentFloorArea !== null ?
-                                (`, ${apartmentFloorArea} m2`)
-                                : ""  
-                            }
+                            <div className="timeStamp">
+                                <div>
+                                    <img src={clockIcon} width="16" height="16"/>
+                                </div>
+                                <div>
+                                {formatRelativeTime(createdTime)}
+                                </div>
                             </div>
+                        </div>
+                        <div>
+                        
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div className="availabilityAndTimeStamp">
-                        <div className="availability">
-                            <div className="availableWrapper">
-                                <div className="available"></div>
-                            </div>
-                            <div>
-                                {apartmentStartDate}
-                            </div>
-                        </div>
-                        <div className="timeStamp">
-                            <div>
-                                <img src={clockIcon} width="16" height="16"/>
-                            </div>
-                            <div>
-                            {formatRelativeTime(createdTime)}
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                    
-                    </div>
-                </div>
+            </Link> 
             </div>
-        </div>
     );
 };
 
