@@ -47,7 +47,7 @@ class Header extends Component {
                                     <div>Sublease</div>
                                 </div>
                             </Link>
-                            <Link to='/about'>About</Link>
+                            <Link to='/chat'>Chat</Link>
                             {currentUser ?
                                     <div>
                                         <div className="profile">
