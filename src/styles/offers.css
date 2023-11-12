@@ -159,6 +159,23 @@
     display: flex;
     justify-content: center;
 }
+
+.filterModalButton{
+    background-color: #ff3377;
+    border-width: 0px;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 150px;
+    height: 30px;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 30px; /* 150% */
+}
+.filterModalButton:hover{
+    background-color: #005999; 
+}
 .cardContainer {
     display:  flex;
     flex-wrap: wrap;

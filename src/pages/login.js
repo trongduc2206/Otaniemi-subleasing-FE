@@ -23,12 +23,12 @@ class Login extends Component {
     this.setState({[target.name]: target.value});
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     const user = {};
       user.username = this.state.username; 
       user.password = this.state.password;
-      let response = RequestPost("/api/auth/login", user, "user", "/") 
+      const response = RequestPost("/api/auth/login", user, "user", "/") 
       this.setState({auth: response})
   }
 
