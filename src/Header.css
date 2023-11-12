@@ -105,7 +105,7 @@ line-height: 20px; /* 83.333% */
     overflow: hidden;
 }
 
-.profileIcon{
+.profileIcon {
     cursor: pointer;
     width: 36px;
     height: 36px;
@@ -115,10 +115,10 @@ line-height: 20px; /* 83.333% */
     line-height: 34px;
     font-family: Helvetica;
     color: white;
-font-size: 24px;
-font-style: normal;
-font-weight: 500;
-line-height: 36px;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 36px;
 }
 
 .profileLinks {

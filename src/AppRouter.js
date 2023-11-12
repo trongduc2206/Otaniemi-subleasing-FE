@@ -7,6 +7,7 @@ import Offers from './pages/offers';
 import Profile from './pages/profile';
 import About from './pages/about';
 import Register from './pages/register';
+import Chat from './pages/chatPage';
 
 const AppRouter = () => {
     return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
             <Route path='/profile' element={ <Profile /> }/>
             <Route path='/create' element={ <Create /> }/>
             <Route path='/about' element={ <About /> }/>
+            <Route path='/chat' element={ <Chat /> }/>
         </Routes>
     );
 }
