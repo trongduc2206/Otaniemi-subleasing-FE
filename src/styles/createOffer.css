@@ -10,7 +10,7 @@
     flex-direction: column;
     box-sizing: border-box;
     align-items: center;
-    width: 932px;
+    width: 732px;
     padding-left: 16px;
     padding-right: 16px;
     gap: 16px;
@@ -49,6 +49,13 @@
 
 }
 
+.textInputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    width: 100%;
+}
+
 .formSubtitle {
     width: 100%;
     color: #999;
@@ -68,6 +75,80 @@
     border-radius: 3px;
 }
 
+.textInput:hover {
+    border: 1px solid #005999;
+    outline: 3px solid #b3dfff;
+
+}
+
 .textInput::placeholder {
     color: #4d4d4d;
+}
+
+.apartmentTypeSelectionContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    width: 100%;
+}
+
+.apartmentTypeSelectionButtons {
+    display: flex;
+    gap: 11px;
+    width: auto;
+}
+
+.rentSpecification {
+    width: 100%;
+}
+
+.nativeRadioButtonLabel {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #000;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px; /* 150% */
+}
+
+.ctaButtons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 46px;
+    margin-bottom: 46px;
+    gap: 11px;
+    align-items: center;
+    width: 100%;
+}
+
+.primaryButtonWide {
+    background-color: #ff3377;
+    border-radius: 4px;
+    color: #ffffff;
+    width: 200px;
+    height: 46px;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 150% */
+
+}
+
+.secondaryButtonWide {
+    background-color: #ffffff;
+    border-radius: 4px;
+    border: 2px solid #ff3377;
+    color: #ff3377;
+    width: 200px;
+    height: 46px;
+font-family: Helvetica;
+font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 24px; /* 150% */
+
 }

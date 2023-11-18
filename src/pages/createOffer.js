@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import Header from "../Header";
+import ApartmentTypeButtonGroup from "./apartmentTypeButtonGroup";
+import DefaultRadioButtonGroup from "./defaultRadioButtonGroup";
+import { Link } from 'react-router-dom';
+import { Button } from "antd";
 import '../styles/createOffer.css';
+
 
 class CreateOffer extends Component {
     render() {
@@ -16,11 +21,40 @@ class CreateOffer extends Component {
               <div className="dividerWrapper">
                 <div className="divider"></div>
               </div>
-              <h2 className="formSubtitle">Location</h2>
-              <input className="textInput" type="text" placeholder="Address"></input>
-              <input className="textInput" type="text" placeholder="Postal code"></input>
-              <input className="textInput" type="text" placeholder="Neighborhood"></input>
-              <input className="textInput" type="text" placeholder="City"></input>
+              <div className="textInputContainer">
+                <h2 className="formSubtitle">Location</h2>
+                <input className="textInput" type="text" placeholder="Address"></input>
+                <input className="textInput" type="text" placeholder="Postal code"></input>
+                <input className="textInput" type="text" placeholder="Neighborhood"></input>
+                <input className="textInput" type="text" placeholder="City"></input>
+              </div>
+              <div className="apartmentTypeSelectionContainer">
+                <h2 className="formSubtitle">Type</h2>
+                <div className="apartmentTypeSelectionButtons">
+                <ApartmentTypeButtonGroup />
+                </div>
+              </div>
+              <div className="textInputContainer">
+                <h2 className="formSubtitle">Rent</h2>
+                <input className="textInput" type="text" placeholder="Rent in euros"></input>
+              </div>
+              <DefaultRadioButtonGroup />
+              <div className="textInputContainer">
+                <h2 className="formSubtitle">Starting</h2>
+                <input className="textInput" type="text" placeholder="DD/MM/YYYY"></input>
+              </div>
+              <div className="textInputContainer">
+                <h2 className="formSubtitle">Ending</h2>
+                <input className="textInput" type="text" placeholder="DD/MM/YYYY"></input>
+              </div>
+              <div className="ctaButtons">
+                <Link to='/create/published'>
+                  <Button className="primaryButtonWide">Publish</Button>
+                </Link>
+                <Link to='/create/additional-information'>
+                  <Button className="secondaryButtonWide">Add more information</Button>
+                </Link>
+              </div>
             </div>
           </div>
         </>

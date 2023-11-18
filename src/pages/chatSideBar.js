@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import ChatListElement from "./chatListElement";
-import { hover } from "@testing-library/user-event/dist/hover";
 
 var messageCount = 5;
 

@@ -1,0 +1,25 @@
+.defaultCheckBox {
+    display: flex;
+    gap: 11px;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid #4d4d4d;
+}
+
+.box:hover {
+    border: 1px solid #005999;
+    outline: 3px solid #b3dfff;
+
+}
+
+.box.checked {
+    background-color: #ff3377;
+    border: 1px solid #ff3377;
+}

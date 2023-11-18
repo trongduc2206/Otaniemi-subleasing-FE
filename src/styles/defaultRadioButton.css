@@ -1,0 +1,82 @@
+/* .defaultRadioButton {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+}
+
+.selected {
+
+}
+
+.radioSelectionCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #005999;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+
+}
+
+.radioSelectionSelected {
+    background-color: #005999;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+
+}
+
+.visible {
+    visibility: visible;
+
+}
+
+.defaultRadioButtonLabel {
+    color: #333;
+    font-family: Helvetica;
+    font-weight: 400;
+    font-size: 16;
+    line-height: 24px;
+
+} */
+
+.defaultRadioButton {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    cursor: pointer;
+}
+
+.radioSelectionCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #005999;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+}
+
+.radioSelectionCircle:hover {
+    border: 1px solid #005999;
+    outline: 3px solid #b3dfff;
+
+}
+
+.radioSelectionIndicator {
+    background-color: #005999;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    visibility: visible;
+}
+
+.defaultRadioButtonLabel {
+    color: #333;
+    font-family: Helvetica;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+}

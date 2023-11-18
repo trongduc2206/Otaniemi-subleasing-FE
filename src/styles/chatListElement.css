@@ -16,6 +16,7 @@
 
 .chatListElement:hover {
     background-color: #f2f2f2;
+    cursor: pointer;
 }
 
 .picture {
@@ -70,4 +71,5 @@
 
 .selected:hover {
     background-color: #33aaff;
+    cursor: auto;
 }

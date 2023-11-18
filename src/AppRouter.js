@@ -8,6 +8,8 @@ import Profile from './pages/profile';
 import About from './pages/about';
 import Register from './pages/register';
 import Chat from './pages/chatPage';
+import OfferPublished from './pages/offerPublished';
+import CreateAdditionalInformation from './pages/createOfferAdditionalInformation';
 
 const AppRouter = () => {
     return (
@@ -20,6 +22,8 @@ const AppRouter = () => {
             <Route path='/create' element={ <Create /> }/>
             <Route path='/about' element={ <About /> }/>
             <Route path='/chat' element={ <Chat /> }/>
+            <Route path='/create/published' element={ <OfferPublished /> }/>
+            <Route path='/create/additional-information' element={ <CreateAdditionalInformation /> }/>
         </Routes>
     );
 }

@@ -1,0 +1,29 @@
+.offerPublishedMainContainer {
+    display: flex;
+    justify-content: center;
+    padding-top: 78px;
+    padding-bottom: 78px;
+
+}
+
+.offerPublishedContent {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    align-items: center;
+    width: 732px;
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 16px;
+}
+
+.uiText {
+    width: 100%;
+    color: #4d4d4d;
+    font-family: Helvetica;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+}
