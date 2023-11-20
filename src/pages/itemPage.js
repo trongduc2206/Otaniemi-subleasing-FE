@@ -1,5 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, useState, useEffect } from "react";
 import Header from "../Header";
+import { useParams } from "react-router";
+import {RequestGet, RequestPost} from './services/apiRequest.js';
 import '../styles/itemPage.css';
 import mainImage from './image 4.png';
 import geo from "../styles/img/geo.svg";
@@ -16,8 +18,98 @@ import {
   CheckSquareOutlined
 } from "@ant-design/icons";
 
-class Item extends Component {
-    render() {
+function formatRelativeTime(timestamp) {
+  const currentTime = new Date();
+  const timeDifference = (currentTime - new Date(timestamp));
+  let timePos;
+  if (timeDifference <= 0) {
+      timePos = -timeDifference;
+  } else { timePos = timeDifference}
+  // console.log(timePos);
+  if (!isFinite(timeDifference)) {
+      return timestamp;
+  }
+  // Convert the time difference to seconds
+  const secondsDifference = Math.floor(timeDifference / 1000);
+
+const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
+
+if (secondsDifference < 60) {
+  return rtf.format(-secondsDifference, 'second');
+} else if (secondsDifference < 3600) {
+  const minutesDifference = Math.floor(secondsDifference / 60);
+  return rtf.format(-minutesDifference, 'minute');
+} else if (secondsDifference < 86400) {
+  const hoursDifference = Math.floor(secondsDifference / 3600);
+  return rtf.format(-hoursDifference, 'hour');
+} else {
+  const daysDifference = Math.floor(secondsDifference / 86400);
+  return rtf.format(-daysDifference, 'day');
+}
+}
+
+function formatDate(dateToFormat) {
+  // Split the input date into parts (month and day)
+      const date = new Date(dateToFormat);
+      const options = { day: 'numeric', month: 'long' };
+      const formattedDate = date.toLocaleDateString('en-US', options); 
+      const parts = formattedDate.split(' ');
+
+      if (parts.length !== 2) {
+      // Invalid input format
+      }
+
+      const month = parts[0];
+      const day = parts[1];
+
+      // Remove any commas or punctuation from the day part
+      const cleanedDay = day.replace(/\D/g, '');
+
+      // Convert the cleaned day to a number and check its value
+      const dayNumber = parseInt(cleanedDay, 10);
+
+      if (isNaN(dayNumber)) {
+      // Invalid day part
+      }
+
+      // Determine the appropriate ordinal suffix (st, nd, rd, or th) for the day
+      let ordinalSuffix;
+      if (dayNumber >= 11 && dayNumber <= 13) {
+      ordinalSuffix = 'th';
+      } else {
+      switch (dayNumber % 10) {
+      case 1:
+          ordinalSuffix = 'st';
+          break;
+      case 2:
+          ordinalSuffix = 'nd';
+          break;
+      case 3:
+          ordinalSuffix = 'rd';
+          break;
+      default:
+          ordinalSuffix = 'th';
+      }
+      }
+
+      // Combine the day with the ordinal suffix and the month
+      return `${dayNumber}${ordinalSuffix} ${month}`;
+}
+
+const Item = (props) => {
+      const [content, setContent] = useState([]);
+      // Access the route parameter ":id"
+      let params = useParams();
+      // Your component logic here
+      useEffect(() => {
+        const fetchData = async () => {
+          const data = await RequestGet("/api/offer/" + params.id)
+          console.log("Item: ",data, params.id)
+          setContent(data);
+        }
+        fetchData();
+      }, []); 
+    
       return (
         <>
           <Header className="Header"/> 
@@ -26,27 +118,11 @@ class Item extends Component {
               <div className="itemPageContent">
                 <div className="itemPageHeaderSection">
                   <div className="itemNameBox">
-                      <div className="name">
-                      Myyrmäki, Vantaa
-                      </div>
-                      <div className="address">
-                      Mäkkylänrinne 4
+                      <div className="itemName">
+                        {content.area} {content.address}
                       </div>
                   </div>
-                  <div className="actionsBox">
-                    <div className="save action">
-                      <HeartOutlined />
-                      Save
-                    </div>
-                    <div className="mapView action">
-                      <img src={ geo } />
-                      Map View
-                    </div>
-                    <div className="share action">
-                      <ShareAltOutlined />
-                      Share
-                    </div>
-                  </div>
+                  
                 </div>
                 <div className="itemImgCarousel">
                   <img src={ mainImage } />
@@ -60,7 +136,10 @@ class Item extends Component {
                         </div>
                         <div className="landlordNameCheck">
                           <div className="landlordName">
-                            Claudia Moretti
+                            {content.user ?
+                                content.user.username
+                                : <></>
+                            }
                           </div>
                           <div className="landlordCheck">
                             <CheckCircleOutlined />
@@ -75,14 +154,14 @@ class Item extends Component {
                     <div className="information">
                       <div className="description">
                         <h3>Description</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam eleifend mi in nulla posuere. Feugiat vivamus at augue eget arcu dictum. Odio tempor orci dapibus ultrices in iaculis nunc. Non blandit massa enim nec dui nunc mattis enim ut. Rhoncus dolor purus non enim praesent elementum facilisis. Purus in massa tempor nec feugiat nisl. Volutpat maecenas volutpat blandit aliquam etiam erat velit. Pellentesque nec nam aliquam sem et tortor consequat id. Eu scelerisque felis imperdiet proin fermentum leo vel.</p>
+                        <p>{content.description}</p>
                       </div>
                       <div className="valuesBox">
                         <div className="valuesSqueare">
                           <div className="values">
                             <div className="price">
                               <div className="priceValue">
-                                459 €
+                              {content.monthlyPrice}€
                               </div>
                               <div className="pricePerTime">
                                 per month
@@ -93,22 +172,31 @@ class Item extends Component {
                                 Double room                                
                               </div>
                               <div className="apartmentArea">
-                                36m2
+                                  {content.apartmentFloorArea ?
+                                    <>
+                                      Area: {content.apartmentFloorArea} 
+                                      m2
+                                    </>
+                                    : <>Area: Not set</>
+                                }
                               </div>
                             </div>
                             <div className="rentTerms">
                               <div className="rentStart">
                                 <CalendarOutlined />
-                                Starting: 1st November, 2023                              
+                                 {"Starting: "+formatDate(content.startDate)}                              
                               </div>
                               <div className="rentEnd">
                                 <CalendarOutlined />
-                                Ending: 31st July, 2024
+                                 {" Ending:"+content.endDate?
+                                        formatDate(content.endDate)
+                                        : <>Not set</>
+                                }
                               </div>
                             </div>
                             <div className="posted">
                               <ClockCircleOutlined />
-                                Posted: 4 hours ago
+                              {" "+formatRelativeTime(content.createdTime)}
                             </div>
                           </div>
                         </div>
@@ -122,36 +210,25 @@ class Item extends Component {
                     <div className="specList">
                       <div className="specBox">
                         <div className="spec">
-                        <CheckSquareOutlined /> Lift
+                        {content.furnished ?
+                                <>
+                                  <CheckSquareOutlined />
+                                  Furnished
+                                </>
+                                : <></>
+                            }
                         </div>
                         <div className="spec">
-                        <CheckSquareOutlined /> Balcony
+                        {content.furnished ?
+                                <>
+                                  <CheckSquareOutlined />
+                                  Laundry room
+                                </>
+                                : <></>
+                            }
                         </div>
                       </div>
-                      <div className="specBox">
-                        <div className="spec">
-                          <CheckSquareOutlined /> Accesible
-                        </div>
-                        <div className="spec">
-                          <CheckSquareOutlined /> Dish washer
-                        </div>
-                      </div>
-                      <div className="specBox">
-                        <div className="spec">
-                          <CheckSquareOutlined /> Washing machine
-                        </div>
-                        <div className="spec">
-                          <CheckSquareOutlined /> Laundry room
-                        </div>
-                      </div>
-                      <div className="specBox">
-                        <div className="spec">
-                          <CheckSquareOutlined /> Furnished
-                        </div>
-                        <div className="spec">
-                          <CheckSquareOutlined /> Sauna possibility
-                        </div>
-                      </div>
+                      
                     </div>
                   </div>
                 </div>
@@ -160,7 +237,6 @@ class Item extends Component {
           </div>
         </>
         );
-    }
 }
 
 export default Item;
