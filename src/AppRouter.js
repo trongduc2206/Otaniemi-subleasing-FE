@@ -10,6 +10,7 @@ import Register from './pages/register';
 import Chat from './pages/chatPage';
 import OfferPublished from './pages/offerPublished';
 import CreateAdditionalInformation from './pages/createOfferAdditionalInformation';
+import Test from "./pages/test";
 
 const AppRouter = () => {
     return (
@@ -24,6 +25,7 @@ const AppRouter = () => {
             <Route path='/chat' element={ <Chat /> }/>
             <Route path='/create/published' element={ <OfferPublished /> }/>
             <Route path='/create/additional-information' element={ <CreateAdditionalInformation /> }/>
+            <Route path='/test' element={<Test/>}/>
         </Routes>
     );
 }
