@@ -8,10 +8,9 @@ const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azu
 
 export async function RequestGet(path, value ) {
     console.log(path, value)
-
     try {
         const response = await axios.get(`${baseURL+path}`, {params: value,})
-        console.log(response);
+        console.log("response:",response);
         if(response.status == "200" && response.data.status.code == "success" ){
             return response.data.data;
         } else { 

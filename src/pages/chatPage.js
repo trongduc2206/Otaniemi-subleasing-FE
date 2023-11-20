@@ -7,6 +7,7 @@ import '../styles/chatPage.css';
 
 class Chat extends Component {
     render() {
+        window.scrollTo(0,0);
       return (
         <>
             <Header className="Header"/>

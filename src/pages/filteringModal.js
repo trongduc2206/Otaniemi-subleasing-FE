@@ -70,17 +70,17 @@ class FilteringModal extends Component {
 
         const setApartmentType = (apartmentTypeNum) => {
             let apartmentType = this.state.apartmentType;
-            console.log(2,apartmentType, apartmentTypeNum);
+            console.log("apartmentType, apartmentTypeNum:",apartmentType, apartmentTypeNum);
             apartmentType = apartmentType.concat([apartmentTypeNum])
-            console.log(2,apartmentType);
+            console.log(apartmentType);
             this.setState({apartmentType})
         };
 
         const changeApartmentType = (apartmentTypeNum) => {
             let apartmentType = this.state.apartmentType;
-            console.log(3,apartmentType, apartmentTypeNum);
+            console.log("apartmentType, apartmentTypeNum:",apartmentType, apartmentTypeNum);
             apartmentType = apartmentType.filter(item => item !== apartmentTypeNum)
-            console.log(3,apartmentType);
+            console.log(apartmentType);
             this.setState({apartmentType})
         };
 
@@ -90,7 +90,7 @@ class FilteringModal extends Component {
         };
 
         const setFilters = (event) => {
-            event.preventDefault();
+            // event.preventDefault();
             const priceLeq = this.state.rangeArray[1];
             const priceGeq = this.state.rangeArray[0];
             const apartmentType  = this.state.apartmentType.toString(); 
@@ -113,7 +113,6 @@ class FilteringModal extends Component {
                 <Modal open={this.props.open} onOk={this.props.onOk} onCancel={this.props.onCancel} width={730}>
                     <div className="filteringContainer">
                         <div className="filteringWindow">
-                        <form onSubmit={setFilters}>
                             <div className="filteringWidnowTitle">
                                 <div className="placeholderAndClose">
                                     <div className="placeholder">
@@ -166,9 +165,8 @@ class FilteringModal extends Component {
                                 </div>
                             </div>
                             <div className="filterfFormElement filterButton">
-                                <button  className="filterModalButton" type="submit">Apply</button>
+                                <button  className="filterModalButton" type="submit" onClick={setFilters}>Apply</button>
                             </div>
-                        </form>
                         </div>
                     </div>
                 </Modal>

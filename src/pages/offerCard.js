@@ -82,7 +82,7 @@ function formatDate(dateToFormat) {
 }
 
 const OfferCard = (props) => {
-    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created } = props;
+    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created, offerID } = props;
     const [apartmentPrice, setApartmentPrice] = useState(props.monthlyPrice);
     const [apartmentArea, setApartmentArea] = useState(props.addressArea);
     const [apartmentStreet, setApartmentStreet] = useState(props.addressStreet);
@@ -94,11 +94,11 @@ const OfferCard = (props) => {
     useEffect(() => {
         setApartmentStartDate(formatDate(startDate));
       }, [startDate]);
-
+    console.log(offerID);
 
     return (
         <div className="Offer-Card">
-                <Link className="link" to={`/offers/item`}>
+                <Link className="link" to={`/offers/item/${offerID}`}>
                 <img src={mainImage} />
                 <div className="offerContent">
                     <div>

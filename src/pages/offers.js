@@ -18,7 +18,7 @@ class Offers extends Component {
         this.state = {
             isModalOpen: false,
             page: 0,
-            size: 20,
+            size: 4,
             content: [],
             totalElements: 1,
             filters: {
@@ -121,6 +121,7 @@ class Offers extends Component {
                             floorArea={object.apartmentFloorArea}
                             startDate={object.startDate}
                             created={object.createdTime}
+                            offerID={object.offerId}
                             />)})
                         )
                         : (<></>)

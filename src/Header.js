@@ -10,6 +10,7 @@ class Header extends Component {
         let currentUser = ""
         // console.log(localStorage.getItem('user'))
             if(localStorage.getItem('user') !== undefined) {
+                console.log(JSON.parse(localStorage.getItem('user')))
                 currentUser = JSON.parse(localStorage.getItem('user'));
             }
         return (
