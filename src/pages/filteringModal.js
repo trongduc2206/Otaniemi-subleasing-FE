@@ -139,10 +139,10 @@ class FilteringModal extends Component {
                                     Type
                                 </div>
                                 <div className="apartmentSelector">
-                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Single Room Apartment" type={1} />
-                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Double Room Apartment" type={2} />
-                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Room in a shared Apartment" type={3} />
-                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Studio" type={4} />
+                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Single Room Apartment" type={0} />
+                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Double Room Apartment" type={1} />
+                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Room in a shared Apartment" type={2} />
+                                    <RadioButton setApartmentType={setApartmentType} changeApartmentType={changeApartmentType} name="Studio" type={3} />
                                 </div>
                                 <div className="horisontalLine">
                                     <hr color="#D9D9D9"/>

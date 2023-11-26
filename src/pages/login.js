@@ -28,7 +28,7 @@ class Login extends Component {
     const user = {};
       user.username = this.state.username; 
       user.password = this.state.password;
-      const response = RequestPost("/api/auth/login", user, "user", "/") 
+      const response = await RequestPost("/api/auth/login", user, "user", "/") 
       this.setState({auth: response})
   }
 

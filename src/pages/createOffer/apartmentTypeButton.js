@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../styles/apartmentTypeButton.css';
+import '../../styles/apartmentTypeButton.css';
 
 const ApartmentTypeButton = ({ buttonLabel, selected, onSelect }) => {
     return (

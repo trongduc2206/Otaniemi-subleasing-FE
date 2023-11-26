@@ -48,8 +48,6 @@ class Offers extends Component {
         }
     }
 
-    
-
     render() {
         let contentOf = this.state.content;
         console.log("content: ", contentOf)

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DefaultRadioButton from "./defaultRadioButton";
-import "../styles/defaultRadioButtonGroup.css"
+import "../../styles/defaultRadioButtonGroup.css"
 
 const DefaultRadioButtonGroup = () => {
     const [selectedButton, setSelectedButton] = useState('Per month');

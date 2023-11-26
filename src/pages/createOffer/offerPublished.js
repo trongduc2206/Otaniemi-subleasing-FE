@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Header from "../Header";
+import Header from "../../Header";
 import { Link } from 'react-router-dom';
 import { Button } from "antd";
-import '../styles/offerPublished.css';
+import '../../styles/offerPublished.css';
 
 class OfferPublished extends Component {
     render() {

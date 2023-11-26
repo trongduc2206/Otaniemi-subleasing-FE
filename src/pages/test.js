@@ -2,6 +2,7 @@ import {Component} from "react";
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import axios from "axios";
+
 class Test extends Component {
     webSocketEndPoint = 'http://localhost:8080/ws';
     topic = "/topic/ducvu-roman";
@@ -16,9 +17,6 @@ class Test extends Component {
             contacts: [],
             chatWith: '',
         };
-
-
-
     }
 
     componentDidMount() {

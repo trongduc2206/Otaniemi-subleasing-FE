@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import { Button } from "antd";
 import './Header.css';
-import logo from './catLogo.png';
-import plusIcon from './plusIcon.svg';
+import logo from './styles/img/catLogo.png';
+import plusIcon from './styles/img/plusIcon.svg';
 
 class Header extends Component {
     render() {

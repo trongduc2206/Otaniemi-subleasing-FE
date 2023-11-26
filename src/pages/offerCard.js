@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
-import mainImage from './image1.png';
-import clockIcon from './clock.svg';
+import mainImage from '../styles/img//image1.png';
+import clockIcon from '../styles/img/clock.svg';
 import { Link } from 'react-router-dom';
 
 function formatRelativeTime(timestamp) {

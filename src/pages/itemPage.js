@@ -3,8 +3,7 @@ import Header from "../Header";
 import { useParams } from "react-router";
 import {RequestGet, RequestPost} from './services/apiRequest.js';
 import '../styles/itemPage.css';
-import mainImage from './image 4.png';
-import geo from "../styles/img/geo.svg";
+import mainImage from '../styles/img/image 4.png';
 import avatar from "../styles/img/avatar.svg";
 import { Button } from "antd";
 import { Link } from 'react-router-dom';
@@ -98,6 +97,12 @@ function formatDate(dateToFormat) {
 
 const Item = (props) => {
       const [content, setContent] = useState([]);
+      const apartmentType = [
+          'Single Room Apartment',
+          'Double Room Apartment',
+          'Room in a shared Apartment',
+          'Studio'
+      ];
       // Access the route parameter ":id"
       let params = useParams();
       // Your component logic here
@@ -169,7 +174,13 @@ const Item = (props) => {
                             </div>
                             <div className="apartmentValues">
                               <div className="apartmentType">
-                                Double room                                
+                                    {content.apartmentType ?
+                                       <>
+                                          Type: {apartmentType[content.apartmentType]}
+                                       </> 
+                                       : 
+                                       <> Error</>        
+                                    }                         
                               </div>
                               <div className="apartmentArea">
                                   {content.apartmentFloorArea ?
@@ -188,15 +199,17 @@ const Item = (props) => {
                               </div>
                               <div className="rentEnd">
                                 <CalendarOutlined />
-                                 {" Ending:"+content.endDate?
-                                        formatDate(content.endDate)
+                                 {content.endDate?
+                                        <>
+                                          {"Ending: "+formatDate(content.endDate)}
+                                        </>
                                         : <>Not set</>
                                 }
                               </div>
                             </div>
                             <div className="posted">
                               <ClockCircleOutlined />
-                              {" "+formatRelativeTime(content.createdTime)}
+                              {"Created: "+formatRelativeTime(content.createdTime)}
                             </div>
                           </div>
                         </div>
@@ -227,6 +240,18 @@ const Item = (props) => {
                                 : <></>
                             }
                         </div>
+                      </div>
+                      <div className="specBox">
+                        <div className="spec">
+                        {content.deposit ?
+                                <>
+                                  <CheckSquareOutlined />
+                                  Deposit
+                                </>
+                                : <></>
+                            }
+                        </div>
+                      
                       </div>
                       
                     </div>

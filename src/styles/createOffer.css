@@ -55,7 +55,9 @@
     gap: 11px;
     width: 100%;
 }
-
+.paddingForAdditional{
+    padding-bottom: 15px;
+}
 .formSubtitle {
     width: 100%;
     color: #999;
@@ -65,12 +67,22 @@
     font-weight: 600;
     line-height: 36px;
 }
-
+.aditionalSubtitle{
+    width: 100%;
+    color: #4d4d4d;
+    font-family: Helvetica;
+    font-size: 24px;
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 36px;
+}
 .textInput{
     box-sizing: border-box;
     width: 100%;
     height: 30px;
     padding-left: 10px;
+    padding-right: 8px;
     border: 1px solid;
     border-radius: 3px;
 }

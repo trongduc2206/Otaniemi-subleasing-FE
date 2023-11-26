@@ -17,7 +17,10 @@ const ApartmentTypeButtonGroup = () => {
     return (
         <>
             {ApartmentTypeButtonGroupFunction.map((current) => (
-                <ApartmentTypeButton key={current.buttonLabel} buttonLabel={current.buttonLabel} selected={current.buttonLabel === selectedButton} onSelect={() => handleButtonSelect(current.buttonLabel)} />
+                <ApartmentTypeButton key={current.buttonLabel} 
+                buttonLabel={current.buttonLabel} 
+                selected={current.buttonLabel === selectedButton} 
+                onSelect={() => handleButtonSelect(current.buttonLabel)} />
             ))}
         </>
     );

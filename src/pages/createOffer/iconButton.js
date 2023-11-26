@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types';
-import '../styles/iconButton.css';
+import '../../styles/iconButton.css';
 
 const IconButton  = ({ variant }) => {
     const getClass = () => {
