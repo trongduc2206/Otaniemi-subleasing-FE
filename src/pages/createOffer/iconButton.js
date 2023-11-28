@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import '../../styles/iconButton.css';
 
-const IconButton  = ({ variant }) => {
+const IconButton  = ({ variant, onSend }) => {
     const getClass = () => {
         switch (variant) {
             case 'attachment':
@@ -28,7 +28,7 @@ const IconButton  = ({ variant }) => {
     }
 
     return (
-        <button class={getClass()}>
+        <button class={getClass()} onClick={onSend}>
             {getIcon()}
         </button>
     );

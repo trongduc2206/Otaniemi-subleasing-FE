@@ -115,6 +115,14 @@ const Item = (props) => {
         fetchData();
       }, []); 
     
+      const handleContact = async () => {
+        const sender = JSON.parse(localStorage.getItem("user")).username
+        const receiver = content.user.username;
+        const response = await RequestGet("/api/chat/messages", {sender: sender, receiver: receiver})
+        console.log(sender+"+"+receiver, response);
+        localStorage.setItem( "contactUser", JSON.stringify(receiver));
+      };
+
       return (
         <>
           <Header className="Header"/> 
@@ -153,7 +161,7 @@ const Item = (props) => {
                         </div>
                       </div>
                       <Link to='/chat'>
-                        <Button className="contactAction">Contact</Button>
+                        <Button className="contactAction" onClick={handleContact} >Contact</Button>
                       </Link>
                     </div>
                     <div className="information">

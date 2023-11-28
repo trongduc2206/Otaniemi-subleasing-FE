@@ -4,7 +4,7 @@ import * as SockJS from 'sockjs-client';
 import axios from "axios";
 
 class Test extends Component {
-    webSocketEndPoint = 'http://localhost:8080/ws';
+    webSocketEndPoint = 'https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/ws';
     topic = "/topic/ducvu-roman";
     stompClient;
     constructor(props) {
@@ -24,7 +24,7 @@ class Test extends Component {
         if(localStorage.getItem("user")) {
             let userId = JSON.parse(localStorage.getItem("user")).id
             console.log(userId)
-            axios.get("http://localhost:8080/api/chat/contact/" + userId).then(
+            axios.get("https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/api/chat/contact/" + userId).then(
                 (response) => {
                     console.log(response.data.data)
                     this.setState({
@@ -54,7 +54,7 @@ class Test extends Component {
                 receiver: this.state.chatWith,
                 content: this.state.inputValue
             }
-            axios.post("http://localhost:8080/api/chat/send",message).then(
+            axios.post("https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/api/chat/send",message).then(
                 (res) => {
 
                 }
@@ -84,7 +84,7 @@ class Test extends Component {
             chatWith: contact,
         }));
 
-        axios.get("http://localhost:8080/api/chat/messages", {params: {sender: JSON.parse(localStorage.getItem("user")).username, receiver: contact}})
+        axios.get("https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/api/chat/messages", {params: {sender: JSON.parse(localStorage.getItem("user")).username, receiver: contact}})
             .then(
                 (response) => {
                     this.setState((prevState) => ({
