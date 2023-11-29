@@ -22,3 +22,13 @@ h1 {
 .value {
     margin-top: 4px;
 }
+
+@media screen and (max-width: 600px) {
+    .profile-container {
+        padding: 10px;
+    }
+
+    .profile-item {
+        margin-bottom: 10px;
+    }
+}

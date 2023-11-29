@@ -53,7 +53,7 @@ const Profile = (props) => {
                     <span className="label">Facebook URL:</span>
                     <div className="value">
                         {user.facebookUrl
-                            ? <a href={user.facebookUrl}> {user.facebookUrl}</a>
+                            ? <a href={user.facebookUrl}  target="_blank"> {user.facebookUrl}</a>
                             : <p>No data</p>
 
                         }
@@ -65,7 +65,7 @@ const Profile = (props) => {
                     <div className="value">
                         <div className="value">
                             {user.telegramUrl
-                                ? <a href={user.telegramUrl}> {user.telegramUrl}</a>
+                                ? <a href={user.telegramUrl}  target="_blank"> {user.telegramUrl}</a>
                                 : <p>No data</p>
                             }
                         </div>
