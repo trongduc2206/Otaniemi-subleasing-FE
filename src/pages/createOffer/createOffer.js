@@ -200,7 +200,7 @@ class CreateOffer extends Component {
                 </div>
                 <div className="textInputContainer">
                     <h2 className="formSubtitle">Description</h2>
-                    <textarea className="description" type="text" placeholder="Write a description" name="description" onChange={this.handleChange}></textarea>
+                    <textarea className="offerDescription" type="text" placeholder="Write a description" name="description" onChange={this.handleChange}></textarea>
                 </div>
                 <div className="specificationsContainer">
                     <h2 className="formSubtitle">Specifications</h2>

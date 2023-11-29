@@ -11,6 +11,54 @@ import '../styles/chatListElement.css';
 import '../styles/chatPage.css';
 
 var messageCount = 5;
+function formatDate(dateToFormat) {
+    // Split the input date into parts (month and day)
+        const date = new Date(dateToFormat);
+        const options = {day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: true };
+        const formattedDate = date.toLocaleString('en-US', options); 
+        const parts = formattedDate.split(' ');
+        console.log(formattedDate)
+        if (parts.length !== 2) {
+        // Invalid input format
+        }
+  
+        const month = parts[0];
+        const day = parts[1];
+        const time = `${parts[3]+" "+parts[4]}`;
+  
+        // Remove any commas or punctuation from the day part
+        const cleanedDay = day.replace(/\D/g, '');
+  
+        // Convert the cleaned day to a number and check its value
+        const dayNumber = parseInt(cleanedDay, 10);
+  
+        if (isNaN(dayNumber)) {
+        // Invalid day part
+        }
+  
+        // Determine the appropriate ordinal suffix (st, nd, rd, or th) for the day
+        let ordinalSuffix;
+        if (dayNumber >= 11 && dayNumber <= 13) {
+        ordinalSuffix = 'th';
+        } else {
+        switch (dayNumber % 10) {
+        case 1:
+            ordinalSuffix = 'st';
+            break;
+        case 2:
+            ordinalSuffix = 'nd';
+            break;
+        case 3:
+            ordinalSuffix = 'rd';
+            break;
+        default:
+            ordinalSuffix = 'th';
+        }
+        }
+  
+        // Combine the day with the ordinal suffix and the month
+        return `${time} ${dayNumber}${ordinalSuffix} ${month}`;
+}
 
 class ChatMessage extends Component {
     render() {
@@ -31,6 +79,7 @@ class ChatMessage extends Component {
                     </div>
                 </div>
                 <div class="timeStamp">
+                {formatDate(this.props.sentTime)}
                 </div>
             </div>
         </>
@@ -162,7 +211,7 @@ class Chat extends Component {
     handleButtonClick = async () => {
         // Do something with the input value (e.g., log it to the console)
         console.log('Input value:', this.state.messageText);
-        if(localStorage.getItem("auth")) {
+        if(localStorage.getItem("auth") && !!this.state.messageText) {
             let user = JSON.parse(localStorage.getItem("user"))
             console.log(user.username)
             let message = {
@@ -189,11 +238,13 @@ class Chat extends Component {
                 <div class="chatContainer">
                     <div class="chatWindow">
                         {this.state.messages.map((message, index) => (
+                            !!message.content?
                             <ChatMessage
                             key={index}
                             sender={message.senderUsername} 
                             content={message.content} 
                             sentTime={message.sentTime} />
+                            :<></>
                         ))}
                     </div>
                     <div class="chatInputContainer">

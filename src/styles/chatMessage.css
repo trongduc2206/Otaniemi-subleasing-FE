@@ -11,6 +11,7 @@
 .messageContent {
     display: flex;
     gap: 14px;
+    align-items: center;
 }
 
 .profileIcon {
