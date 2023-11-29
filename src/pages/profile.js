@@ -16,7 +16,7 @@ const Profile = (props) => {
             let userId = JSON.parse(localStorage.getItem("user")).id
             console.log(params.id)
             if(Number(params.id) === Number(userId)) {
-                axios.get("http://localhost:8080/api/user/" + userId).then(
+                axios.get("https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/api/user/" + userId).then(
                     (response) => {
                         console.log(response.data.data)
                         setUser(response.data.data)
