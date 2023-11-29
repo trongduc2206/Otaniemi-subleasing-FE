@@ -57,11 +57,14 @@ class Header extends Component {
                                                     {currentUser.username.charAt(0)}
                                                 </div>
                                                 <div className="dropdown-content">
-                                                    <Link className="profileLinks" onClick={() => {
-                                                        console.log("logout");
-                                                        localStorage.removeItem("user");
-                                                        window.location.replace("/");
-                                                    } }> Profile </Link>
+                                                    <Link className="profileLinks"
+                                                    //       onClick={() => {
+                                                    //     // console.log("logout");
+                                                    //     // localStorage.removeItem("user");
+                                                    //     window.location.replace("/profile");
+                                                    // } }
+                                                          to={`/profile/${currentUser.id}`}
+                                                    > Profile </Link>
                                                     <Link className="profileLinks" onClick={() => {
                                                         console.log("logout");
                                                         localStorage.removeItem("user");
