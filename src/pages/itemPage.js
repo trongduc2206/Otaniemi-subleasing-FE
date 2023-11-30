@@ -130,7 +130,8 @@ const Item = (props) => {
       return (
         <>
           <Header className="Header" showBack={true}/> 
-          <div className="itemPageMainContainer">
+          {/*<div className="itemPageMainContainer">*/}
+          <div className="itemPageContainer">
             <div className="itemPageCard">
               <div className="itemPageContent">
                 <div className="itemPageHeaderSection">
