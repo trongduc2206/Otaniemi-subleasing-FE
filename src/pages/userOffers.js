@@ -75,8 +75,8 @@ class UserOffers extends Component {
             console.log("offerId",offerId);
             const page = 0;
             const {size} = this.state; 
-            const { content, totalElements } = await this.handleApiRequest("DELETE",`/api/offer/${offerId}`)
-            this.setState({ content, totalElements})
+            await this.handleApiRequest("DELETE",`/api/offer/${offerId}`)
+            window.location.reload();
         };
 
       return (

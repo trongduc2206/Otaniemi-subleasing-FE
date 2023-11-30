@@ -18,7 +18,7 @@ class Offers extends Component {
         this.state = {
             isModalOpen: false,
             page: 0,
-            size: 25,
+            size: 15,
             content: [],
             totalElements: 1,
             filters: {

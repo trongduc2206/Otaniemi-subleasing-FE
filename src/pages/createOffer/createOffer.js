@@ -109,7 +109,8 @@ class CreateOffer extends Component {
         console.log(isChecked);
         this.setState({deposit: !isChecked});
       };
-      const onSubmit = async () => {
+      const onSubmit = async (event) => {
+          event.preventDefault();
           const user = JSON.parse(localStorage.getItem('user'));
           const userId = user.id;
           const area = this.state.address;
@@ -153,7 +154,10 @@ class CreateOffer extends Component {
           if(laundry) {
             laundry = 1
           } else { laundry = 0}
+          await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit}) 
           await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})  
+          await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})  
+          await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})   
           window.location.replace(`/create/published`)
       };
       return (

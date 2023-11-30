@@ -60,6 +60,13 @@
     justify-content: center;
 }
 
+:where(.css-dev-only-do-not-override-amq5gd).ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover{
+    background-color: #005999;
+}
+:where(.css-amq5gd).ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover{
+    background-color: #005999;
+}
+
 .button {
     background-color: #ff3377;
     border-width: 0px;
