@@ -24,6 +24,13 @@
     display: flex;
     flex-direction: column;
 }
+:where(.css-amq5gd).ant-modal .ant-modal-content{
+    padding: 0;
+    margin: auto;
+    width: 730px;
+    display: flex;
+    flex-direction: column;
+}
 .ant-modal-footer{
     display: none;
 }
@@ -127,11 +134,25 @@
     color: #ff3377;
     background-color: #ff3377;
 }
+:where(.css-amq5gd).ant-slider .ant-slider-track {
+    color: #ff3377;
+    background-color: #ff3377;
+}
+
 :where(.css-dev-only-do-not-override-amq5gd).ant-slider:hover .ant-slider-track {
     color: #ff3377;
     background-color: #ff3377;
 }
+:where(.css-amq5gd).ant-slider:hover .ant-slider-track {
+    color: #ff3377;
+    background-color: #ff3377;
+}
+
 :where(.css-dev-only-do-not-override-amq5gd).ant-slider .ant-slider-handle::after {
+    box-shadow: 0 0 2px #ff3377;
+    color: #ff3377; 
+}
+:where(.css-amq5gd).ant-slider .ant-slider-handle::after {
     box-shadow: 0 0 2px #ff3377;
     color: #ff3377; 
 }
@@ -140,8 +161,16 @@
     box-shadow: 0 0 2px #ff3377;
     color: #ff3377; 
 }
+:where(.css-amq5gd).ant-slider:hover .ant-slider-handle::after {
+    box-shadow: 0 0 2px #ff3377;
+    color: #ff3377; 
+}
 
 :where(.css-dev-only-do-not-override-amq5gd).ant-slider .ant-slider-handle:hover::after, :where(.css-dev-only-do-not-override-amq5gd).ant-slider .ant-slider-handle:active::after, :where(.css-dev-only-do-not-override-amq5gd).ant-slider .ant-slider-handle:focus::after{
+    box-shadow: 0 0 0 4px #ff3377;
+    color: #ff3377;
+}
+:where(.css-amq5gd).ant-slider .ant-slider-handle:hover::after, :where(.css-amq5gd).ant-slider .ant-slider-handle:active::after, :where(.css-dev-only-do-not-override-amq5gd).ant-slider .ant-slider-handle:focus::after{
     box-shadow: 0 0 0 4px #ff3377;
     color: #ff3377;
 }
@@ -197,6 +226,10 @@ line-height: 30px; /* 150% */
 }
 
 :where(.css-dev-only-do-not-override-amq5gd).ant-pagination .ant-pagination-item a {
+    display: block;
+    padding: 3px 6px;
+}
+:where(.css-amq5gd).ant-pagination .ant-pagination-item a {
     display: block;
     padding: 3px 6px;
 }
