@@ -14,17 +14,15 @@ var messageCount = 5;
 function formatDate(dateToFormat) {
     // Split the input date into parts (month and day)
         const date = new Date(dateToFormat);
-        const options = {day: 'numeric', month: 'long', hour: 'numeric', minute: 'numeric', hour12: true };
+        const options = {day: 'numeric', month: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true };
         const formattedDate = date.toLocaleString('en-US', options); 
         const parts = formattedDate.split(' ');
-        console.log(formattedDate)
         if (parts.length !== 2) {
         // Invalid input format
         }
   
-        const month = parts[0];
-        const day = parts[1];
-        const time = `${parts[3]+" "+parts[4]}`;
+        const day = parts[0].slice(0, -1);;
+        const time = `${parts[1]+" "+parts[2]}`;
   
         // Remove any commas or punctuation from the day part
         const cleanedDay = day.replace(/\D/g, '');
@@ -37,50 +35,43 @@ function formatDate(dateToFormat) {
         }
   
         // Determine the appropriate ordinal suffix (st, nd, rd, or th) for the day
-        let ordinalSuffix;
-        if (dayNumber >= 11 && dayNumber <= 13) {
-        ordinalSuffix = 'th';
-        } else {
-        switch (dayNumber % 10) {
-        case 1:
-            ordinalSuffix = 'st';
-            break;
-        case 2:
-            ordinalSuffix = 'nd';
-            break;
-        case 3:
-            ordinalSuffix = 'rd';
-            break;
-        default:
-            ordinalSuffix = 'th';
-        }
-        }
   
         // Combine the day with the ordinal suffix and the month
-        return `${time} ${dayNumber}${ordinalSuffix} ${month}`;
+        return `${time} ${day}`;
 }
 
 class ChatMessage extends Component {
     render() {
+        let userMessage = false;
+        if(this.props.sender == JSON.parse(localStorage.getItem("user")).username){
+            userMessage = true;
+        }
       return (
         <>
-            <div class="chatMessageContainer">
+            <div class={userMessage? "chatUserMessageContainer" : "chatOtherMessageContainer" }>
                 <div class="messageContent">
+                
                     <div class="profileIcon">
                         {this.props.sender.charAt(0)}
                     </div>
                     <div class="nameAndMessage">
-                        <div class="name">
-                            {this.props.sender}
+                        <div class="nameAndDate">
+                            <div className="name">
+                                {userMessage?
+                                    "You"
+                                    : this.props.sender
+                                }
+                            </div>
+                            <div class="timeStamp">
+                                {formatDate(this.props.sentTime)}
+                            </div>
                         </div>
                         <div class="message">
                             {this.props.content}
                         </div>
                     </div>
                 </div>
-                <div class="timeStamp">
-                {formatDate(this.props.sentTime)}
-                </div>
+                
             </div>
         </>
         );
@@ -183,9 +174,12 @@ class Chat extends Component {
             messages: messages, // Update only field2
         }));
     }
-
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView();
+    }
     handleItemClick = async (contact) => {
-        console.log(contact)
+        
+        // window.scrollTo(0,1000);
         this.setState((prevState) => ({
             ...prevState,
             chatWith: contact,
@@ -200,12 +194,12 @@ class Chat extends Component {
             let ws = new SockJS(this.webSocketEndPoint);
             this.stompClient = Stomp.over(ws);
             const _this = this;
-            _this.stompClient.connect({}, function (frame) {
-                _this.stompClient.subscribe(topicName, function (sdkEvent) {
+            _this.stompClient.connect({},async function (frame) {
+                await _this.stompClient.subscribe(topicName, function (sdkEvent) {
                     _this.onMessageReceived(sdkEvent);
                 });
             }, this.errorCallBack);
-
+            this.scrollToBottom();
     }
 
     handleButtonClick = async () => {
@@ -228,15 +222,18 @@ class Chat extends Component {
     render() {
       return (
         <>
-            <Header className="Header"/>
+            <Header className="Header" showBack={true}/>
             <div class="chatPageMainContainer">
                 <aside class="sideBar">
                         <ChatSidebar 
                             handleItemClick={this.handleItemClick}
                             contacts={this.state.contacts}/>
                 </aside>
-                <div class="chatContainer">
+                <div class="chatContainer " id="scroll">
                     <div class="chatWindow">
+                        <div className="chatOtherMessage">
+
+                        </div>
                         {this.state.messages.map((message, index) => (
                             !!message.content?
                             <ChatMessage
@@ -251,6 +248,9 @@ class Chat extends Component {
                         <IconButton variant="attachment" />
                         <input class="messageInput" type="text" placeholder="Write a message..." name="messageText" onChange={this.handleChange}></input>
                         <IconButton variant="send" onSend={this.handleButtonClick}/>
+                        <div style={{ float:"left", clear: "both" }}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                        </div>
                     </div>
                 </div>
             </div>

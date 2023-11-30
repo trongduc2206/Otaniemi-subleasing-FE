@@ -34,7 +34,14 @@ class Header extends Component {
                                         <Button onClick={this.props.onFilterClear}>Clear Filters</Button>
                                         : <></>
                                     }
-                                    
+                                </>
+                                : <></>
+                            }
+                            {this.props.showBack ?
+                                <>
+                                    <Button className="primaryButton" onClick={() => {
+                                        window.location.replace("/")
+                                    }}>Back</Button>
                                 </>
                                 : <></>
                             }
@@ -48,23 +55,24 @@ class Header extends Component {
                                     <div>Sublease</div>
                                 </div>
                             </Link>
-                            <Link to='/about'>About</Link>
+                            {currentUser ? 
+                                    <Link to='/chat'>Chat</Link>
+                                    : <></>
+                            }
                             {currentUser ?
                                     <div>
                                         <div className="profile">
                                             <div className="dropdown">
                                                 <div className="profileIcon">
-                                                    {currentUser.username.charAt(0)}
+                                                    {currentUser.username.charAt(0).toUpperCase()}
                                                 </div>
                                                 <div className="dropdown-content">
                                                     <Link className="profileLinks"
-                                                    //       onClick={() => {
-                                                    //     // console.log("logout");
-                                                    //     // localStorage.removeItem("user");
-                                                    //     window.location.replace("/profile");
-                                                    // } }
                                                           to={`/profile/${currentUser.id}`}
                                                     > Profile </Link>
+                                                    <Link className="profileLinks"
+                                                          to={`/offers/${currentUser.id}`}
+                                                    > My offers </Link>
                                                     <Link className="profileLinks" onClick={() => {
                                                         console.log("logout");
                                                         localStorage.removeItem("user");

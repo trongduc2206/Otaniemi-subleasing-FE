@@ -1,4 +1,8 @@
 import React, { Component, useState, useEffect } from "react";
+import { Button } from "antd";
+import {
+    DeleteOutlined
+  } from "@ant-design/icons";
 import mainImage from '../styles/img//image1.png';
 import clockIcon from '../styles/img/clock.svg';
 import { Link } from 'react-router-dom';
@@ -82,7 +86,7 @@ function formatDate(dateToFormat) {
 }
 
 const OfferCard = (props) => {
-    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created, offerID } = props;
+    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created, offerID, deleteOffer, onDelete, } = props;
     const [apartmentPrice, setApartmentPrice] = useState(props.monthlyPrice);
     const [apartmentArea, setApartmentArea] = useState(props.addressArea);
     const [apartmentStreet, setApartmentStreet] = useState(props.addressStreet);
@@ -94,16 +98,22 @@ const OfferCard = (props) => {
     useEffect(() => {
         setApartmentStartDate(formatDate(startDate));
       }, [startDate]);
-    console.log(offerID);
+    console.log("OfferCard offerId :",offerID);
 
+    const deleteApartmentOffer = async () => {
+        await onDelete({offerID});
+    };
+
+    const openOffer = async () => {
+        window.location.replace(`/offers/item/${offerID}`);
+    };
     return (
-        <div className="Offer-Card">
-                <Link className="link" to={`/offers/item/${offerID}`}>
-                <img src={mainImage} />
+        <div className="Offer-Card" >
+                <img className="offerCardImage" src={mainImage} onClick={openOffer}/>
                 <div className="offerContent">
                     <div>
                         <div>
-                            <div className="locationAndPrice">
+                            <div className="locationAndPrice cursorPointer" onClick={openOffer}>
                                 <div>
                                     {apartmentArea}
                                 </div>
@@ -111,13 +121,13 @@ const OfferCard = (props) => {
                                     {apartmentPrice}
                                 </div>
                             </div>
-                            <div className="billingPeriod">
+                            <div className="billingPeriod cursorPointer">
                             per month
                             </div>
                         </div>
                         <div>
-                            <div className="addressAndType">
-                                <div className="address">
+                            <div className="addressAndType cursorPointer" onClick={openOffer}>
+                                <div className="address" >
                                     {apartmentStreet}
                                 </div>
                                 <div className="type">
@@ -133,17 +143,17 @@ const OfferCard = (props) => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="timeAndDelete">
                         <div className="availabilityAndTimeStamp">
-                            <div className="availability">
+                            <div className="availability cursorPointer" onClick={openOffer}>
                                 <div className="availableWrapper">
                                     <div className="available"></div>
                                 </div>
-                                <div>
+                                <div onClick={openOffer}>
                                     {apartmentStartDate}
                                 </div>
                             </div>
-                            <div className="timeStamp">
+                            <div className="offerTimeStamp cursorPointer" onClick={openOffer}>
                                 <div>
                                     <img src={clockIcon} width="16" height="16"/>
                                 </div>
@@ -152,12 +162,16 @@ const OfferCard = (props) => {
                                 </div>
                             </div>
                         </div>
-                        <div>
-                        
+                        <div className="deleteOffer">
+                            {deleteOffer?
+                                <Button className="primaryButton" onClick={deleteApartmentOffer}>
+                                    <DeleteOutlined />
+                                </Button>
+                                : <></>
+                            }
                         </div>
                     </div>
                 </div>
-            </Link> 
             </div>
     );
 };

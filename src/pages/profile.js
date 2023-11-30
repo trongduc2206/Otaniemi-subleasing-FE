@@ -26,11 +26,11 @@ const Profile = (props) => {
             console.log(userId)
 
         }
-    })
+    }, [])
 
       return (
         <>
-            <Header className="Header"/>
+            <Header className="Header" showBack={true}/>
             <div className="profile-container">
                 <h1>User Profile</h1>
 

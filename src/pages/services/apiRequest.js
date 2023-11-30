@@ -50,4 +50,25 @@ export async function RequestPost(path, value, responseValueName, secondPath) {
         }
 }
 
+export async function RequestDelete(path, value) {
+    console.log(path, value)
+    try {
+        const response = await axios.delete(`${baseURL+path}`, {params: value,})
+        console.log("response:",response);
+        if(response.status == "200" && response.data.status.code == "success" ){
+            return response.data.data;
+        } else { 
+            notification.error({
+                message: 'Wrong username or password',
+                description: response.data.status.message
+            })
+        }
+    } catch (error) {
+        notification.error({
+            message: 'Login Failed',
+            description: error.response
+        })
+    }
+};
+
 export default {RequestGet, RequestPost};

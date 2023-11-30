@@ -9,7 +9,7 @@ import About from './pages/about';
 import Register from './pages/register';
 import Chat from './pages/chatPage';
 import OfferPublished from './pages/createOffer/offerPublished';
-import Test from "./pages/test";
+import UserOffers from './pages/userOffers';
 
 const AppRouter = () => {
     return (
@@ -23,7 +23,7 @@ const AppRouter = () => {
             <Route path='/about' element={ <About /> }/>
             <Route path='/chat' element={ <Chat /> }/>
             <Route path='/create/published' element={ <OfferPublished /> }/>
-            <Route path='/test' element={<Test/>}/>
+            <Route path='/offers/:id' element={<UserOffers/>}/>
         </Routes>
     );
 }

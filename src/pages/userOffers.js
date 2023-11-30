@@ -1,8 +1,9 @@
 import React, { Component, useState} from "react";
-import OfferCard from "./offerCard";
-import FilteringModal from "./filteringModal";
-import Header from "../Header";
-import {RequestGet, RequestPost} from './services/apiRequest.js';
+import OfferCard from "./offerCard.js";
+import { useParams } from "react-router";
+import FilteringModal from "./filteringModal.js";
+import Header from "../Header.js";
+import {RequestGet, RequestPost, RequestDelete} from './services/apiRequest.js';
 import { Link } from 'react-router-dom';
 import {
     Button,
@@ -12,10 +13,11 @@ import {
   } from 'antd';
 import '../styles/offers.css';
 
-class Offers extends Component {
+class UserOffers extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            user: "",
             isModalOpen: false,
             page: 0,
             size: 25,
@@ -33,16 +35,20 @@ class Offers extends Component {
 
     async componentDidMount() {
         // do something
+        const user = JSON.parse(localStorage.getItem("user"));
+        const userId = user.id;
         const {page, size} = this.state; 
         console.log("ComponentDidMount")
-        const {content, totalElements} = await RequestGet("/api/offer", {page, size})
-        this.setState({ content, totalElements })
+        const {content, totalElements} = await RequestGet("/api/offer/manage", {page, size, userId})
+        this.setState({ user, content, totalElements })
     }
 
     async handleApiRequest(type, path, value, responseValueName, secondPath){
         console.log("type:", type)
         if(type === "GET"){
             return await RequestGet(path, value)
+        } else if (type === "DELETE"){ 
+            return await RequestDelete(path, value)
         } else {
             RequestPost(path, value,responseValueName, secondPath)
         }
@@ -51,19 +57,6 @@ class Offers extends Component {
     render() {
         let contentOf = this.state.content;
         console.log("content: ", contentOf)
-
-        const showModal = (event) => {
-            event.preventDefault();
-            this.setState({isModalOpen: true});
-        };
-        
-        const handleOk = () => {
-            this.setState({isModalOpen: false});
-        };
-    
-        const handleCancel = (event) => {
-            this.setState({isModalOpen: false});
-        };
 
         const onPageChange = async (event) => {
             const pageNumber = event;
@@ -76,36 +69,21 @@ class Offers extends Component {
             this.setState({ content, totalElements })
         }
         
-        const onApply = async (filter) => {
+        const onDelete = async (props) => {
             // event.preventDefault();
+            const offerId = props.offerID;
+            console.log("offerId",offerId);
             const page = 0;
             const {size} = this.state; 
-            const filters = filter;
-            const isSet = true; 
-            const { content, totalElements } = await this.handleApiRequest("GET","/api/offer/filter", {page,size,...filters})
-            this.setState({ content, totalElements, filters, isSet, isModalOpen: false})
+            const { content, totalElements } = await this.handleApiRequest("DELETE",`/api/offer/${offerId}`)
+            this.setState({ content, totalElements})
         };
-
-        const onFilterClear = async (event) => {
-            const {page, size} = this.state; 
-            const isSet = false;
-            console.log("Clear filters")
-            const {content, totalElements} = await RequestGet("/api/offer", {page, size})
-            this.setState({ content, totalElements, isSet })
-        };
-
 
       return (
           <>
-          <Header className="Header" main={true} showBack={false} isSet={this.state.isSet} onFilterClear={onFilterClear} showModal={showModal}/> 
+          <Header className="Header" showBack={true}/> 
           <div className="frontPageMainContainer"> 
             <div className="wrapCardContainer">
-                <FilteringModal 
-                    onApply={onApply} 
-                    open={this.state.isModalOpen} 
-                    onOK={handleOk} 
-                    onCancel={handleCancel} 
-                />
                 <div className="cardContainer">
                 { contentOf ? (
                     contentOf.map((object) => {
@@ -120,6 +98,8 @@ class Offers extends Component {
                             startDate={object.startDate}
                             created={object.createdTime}
                             offerID={object.offerId}
+                            deleteOffer={true}
+                            onDelete={onDelete}
                             />)})
                         )
                         : (<></>)
@@ -135,4 +115,4 @@ class Offers extends Component {
     }
 }
 
-export default Offers;
+export default UserOffers;

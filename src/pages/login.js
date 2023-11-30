@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Header from "../Header";
 import { Link } from 'react-router-dom';
 import {RequestGet, RequestPost} from './services/apiRequest.js';
+import {
+  notification,
+} from 'antd';
 import '../styles/login.css';
 
 class Login extends Component {
@@ -35,7 +38,7 @@ class Login extends Component {
   render() {
     return (
       <>
-      <Header className="Header"/> 
+      <Header className="Header" /> 
       <div className="loginPageMainContainer">
         <div className="formContainer">
           <form onSubmit={this.handleSubmit}>

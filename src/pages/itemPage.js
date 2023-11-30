@@ -104,7 +104,7 @@ const Item = (props) => {
           'Studio'
       ];
       // Access the route parameter ":id"
-      let params = useParams();
+      const params = useParams();
       // Your component logic here
       useEffect(() => {
         const fetchData = async () => {
@@ -116,16 +116,20 @@ const Item = (props) => {
       }, []); 
     
       const handleContact = async () => {
-        const sender = JSON.parse(localStorage.getItem("user")).username
-        const receiver = content.user.username;
-        const response = await RequestGet("/api/chat/messages", {sender: sender, receiver: receiver})
-        console.log(sender+"+"+receiver, response);
-        localStorage.setItem( "contactUser", JSON.stringify(receiver));
+        if(localStorage.getItem("user")) {
+          const sender = JSON.parse(localStorage.getItem("user")).username
+          const receiver = content.user.username;
+          const response = await RequestGet("/api/chat/messages", {sender: sender, receiver: receiver})
+          console.log(sender+"+"+receiver, response);
+          localStorage.setItem( "contactUser", JSON.stringify(receiver));
+        } else {
+          window.location.replace("/login")
+        }
       };
 
       return (
         <>
-          <Header className="Header"/> 
+          <Header className="Header" showBack={true}/> 
           <div className="itemPageMainContainer">
             <div className="itemPageCard">
               <div className="itemPageContent">

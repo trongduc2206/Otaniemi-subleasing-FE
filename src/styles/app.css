@@ -1,4 +1,4 @@
-body::-webkit-scrollbar {
+/* body::-webkit-scrollbar {
     width: 6px;
 }
       
@@ -16,5 +16,5 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover {
     background: #d2d2d2;
     border-radius: 10px;
-}
+} */
 

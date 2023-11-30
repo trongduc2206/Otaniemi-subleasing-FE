@@ -78,6 +78,9 @@ class Register extends Component {
       user.username = values.username;
       user.password = values.password; 
       user.fullName = values.fullName;
+      user.facebookUrl = values.facebookUrl;
+      user.telegramUrl = values.telegramUrl;
+      user.phoneNumber = values.phoneNumber;
       
       RequestPost("/api/auth/signup", user, false, "/login")
   };
@@ -194,6 +197,29 @@ class Register extends Component {
               <Input className="input" placeholder="Fullname"/>
             </Form.Item>
 
+            <Form.Item
+              name="facebookUrl"
+              tooltip="For example: John Doe"
+              rules={[{ required: false, message: 'Please input your facebook url!', whitespace: true }]}
+            >
+              <Input className="input" placeholder="Facebook Url"/>
+            </Form.Item>
+
+            <Form.Item
+              name="telegramUrl"
+              tooltip="For example: John Doe"
+              rules={[{ required: false, message: 'Please input your telegram url!', whitespace: true }]}
+            >
+              <Input className="input" placeholder="Telegram Url"/>
+            </Form.Item>
+            
+            <Form.Item
+              name="phoneNumber"
+              tooltip="For example: John Doe"
+              rules={[{ required: false, message: 'Please input your phone number!', whitespace: true }]}
+            >
+              <Input className="input" placeholder="Phone number"/>
+            </Form.Item>
 
             {/* <Form.Item label="Captcha" extra="We must make sure that your are a human.">
               <Row gutter={8}>

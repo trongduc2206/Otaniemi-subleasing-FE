@@ -158,7 +158,7 @@ class CreateOffer extends Component {
       };
       return (
         <>
-          <Header />
+          <Header showBack={true}/>
           <div className="createOfferMainContainer">
             <div className="createOfferForm">
               <h1 className="title">Sublease</h1>
