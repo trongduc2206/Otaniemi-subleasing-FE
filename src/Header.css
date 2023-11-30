@@ -191,11 +191,6 @@ line-height: 24px; /* 150% */
     border-color: #005999;
 }
 
-:where(.css-amq5gd).ant-btn >span{
-    background-color: #005999;
-    color: #ffffff;
-}
-
 :where(.css-amq5gd).ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
     color: #005999;
     border-color: #ffffff;
