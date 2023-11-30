@@ -20,14 +20,15 @@
 :where(.css-dev-only-do-not-override-amq5gd).ant-modal .ant-modal-content{
     padding: 0;
     margin: auto;
-    width: 730px;
+    width: 330px;
+    height: min-content;
     display: flex;
     flex-direction: column;
 }
 :where(.css-amq5gd).ant-modal .ant-modal-content{
     padding: 0;
     margin: auto;
-    width: 730px;
+    width: 330px;
     display: flex;
     flex-direction: column;
 }
@@ -39,7 +40,7 @@
     right: auto;
     z-index: 0;
     top: 82px;
-    min-width: 720px;
+    min-width: 320px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -53,7 +54,7 @@
     justify-content: center;
 }
 .filteringWidnowTitle {
-    width: 700px;
+    width: 300px;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -62,12 +63,12 @@
 
 .horisontalLine hr{
     margin: 0 auto;
-    width: 692px;
+    width: 292px;
     color: #D9D9D9;
 }
 
 .placeholderAndClose {
-    width: 700px;
+    width: 300px;
     padding: 10px 10px 10px 0px;
     margin: auto;
     overflow: hidden;
@@ -79,7 +80,7 @@
 
 .locationSearch {
     padding-top: 10px;
-    width: 700px;
+    width: 300px;
     height: 65px;
     margin: auto;
     display: flex;
@@ -89,8 +90,8 @@
 
 .typeSearch {
     padding-top: 15px;
-    width: 700px;
-    height: 85px;
+    width: 300px;
+    height: min-content;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -101,7 +102,7 @@
 }
 .apartmentSelector {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: left;
     gap: 10px;
 }
@@ -122,7 +123,7 @@
 }
 .priceSearch {
     padding-top: 15px;
-    width: 700px;
+    width: 300px;
     height: 60px;
     margin: auto;
     display: flex;
@@ -175,7 +176,7 @@
     color: #ff3377;
 }
 .filterfFormElement input{
-    width: 690px;
+    width: 240px;
     height: 30px;
     padding-left: 10px;
     border: 1px solid;
@@ -194,7 +195,7 @@
     border-width: 0px;
     border-radius: 4px;
     color: #ffffff;
-    width: 150px;
+    width: 100px;
     height: 30px;
 font-family: Helvetica;
 font-size: 16px;
@@ -341,4 +342,58 @@ line-height: 30px; /* 150% */
     flex-direction: row;
     align-items: center;
     gap: 8px;
+}
+
+@media (min-width: 768px) {
+    .filteringContainer {
+        min-width: 720px; /* Adjust as needed for larger screens */
+    }
+    .filteringWidnowTitle {
+        width: 700px;
+    }
+    .horisontalLine hr{
+        width: 692px;
+    }
+
+    .placeholderAndClose {
+        width: 700px;
+    }
+
+    .locationSearch {
+        width: 700px;
+    }
+
+    .typeSearch {
+        width: 700px;
+        height: 85px;
+    }
+    .priceSearch {
+        width: 700px;
+    }
+    .filterfFormElement input{
+        width: 690px;
+    }
+    .filterModalButton {
+        height: 30px;
+    }
+    .radioButton {
+        height: 20px;
+    }
+    :where(.css-dev-only-do-not-override-amq5gd).ant-modal .ant-modal-content{
+        padding: 0;
+        margin: auto;
+        width: 730px;
+        display: flex;
+        flex-direction: column;
+    }
+    :where(.css-amq5gd).ant-modal .ant-modal-content{
+        padding: 0;
+        margin: auto;
+        width: 730px;
+        display: flex;
+        flex-direction: column;
+    }
+    .apartmentSelector {
+        flex-direction: row;
+    }
 }
