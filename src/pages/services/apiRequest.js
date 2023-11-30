@@ -32,16 +32,18 @@ export async function RequestPost(path, value, responseValueName, secondPath) {
         try {
             const response = await axios.post(`${baseURL+path}`, value)
             console.log("response:",response);
-            if(responseValueName){
-                if(responseValueName === "user"){
-                    localStorage.setItem(`auth`, true)
-                } 
-                localStorage.setItem(`${responseValueName}`, JSON.stringify(response.data.data))
+            if(response.status == "200" && response.data.status.code == "success" ){
+                if(responseValueName){
+                    if(responseValueName === "user"){
+                        localStorage.setItem(`auth`, true)
+                    } 
+                    localStorage.setItem(`${responseValueName}`, JSON.stringify(response.data.data))
+                }
+                if(secondPath){
+                    window.location.replace(`${secondPath}`)
+                }
+                return response.data.data;
             }
-            if(secondPath){
-                window.location.replace(`${secondPath}`)
-            }
-            return response.data.data;
         } catch (error) {
             notification.error({
                 message: 'Login Failed',

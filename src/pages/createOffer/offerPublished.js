@@ -6,6 +6,7 @@ import '../../styles/offerPublished.css';
 
 class OfferPublished extends Component {
     render() {
+        const userId = JSON.parse(localStorage.getItem('user')).id;
       return (
         <>
             <Header />
@@ -15,8 +16,8 @@ class OfferPublished extends Component {
                     <h1 className="title">Thank You!</h1>
                     <p className="uiText">Your offer was succesfully published.</p>
                     <div className="ctaButtons">
-                        <Link to='/'>
-                            <Button className="primaryButtonWide">Back to search</Button>
+                        <Link to={`/offers/${userId}`}>
+                            <Button className="primaryButtonWide">To my offers</Button>
                         </Link>
                     </div>
                 </div>
