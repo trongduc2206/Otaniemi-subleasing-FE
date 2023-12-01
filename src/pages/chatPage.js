@@ -216,7 +216,21 @@ class Chat extends Component {
             console.log("message, response:", message)
             const response = await RequestPost("/api/chat/send", message)
             console.log("message, response:", message, response);
+            this.setState((prevState) => ({
+                ...prevState,
+                messageText: ''
+            }))
           }
+    };
+
+    handleKeyPress = async (event) => {
+        // Check if the pressed key is "Enter" (key code 13)
+        if (event.key === 'Enter') {
+            // Handle the "Enter" key press, for example, submit the form or perform an action
+            console.log('Enter key pressed');
+            await this.handleButtonClick();
+            // Add your logic here
+        }
     };
 
     render() {
@@ -246,7 +260,7 @@ class Chat extends Component {
                     </div>
                     <div class="chatInputContainer">
                         <IconButton variant="attachment" />
-                        <input class="messageInput" type="text" placeholder="Write a message..." name="messageText" onChange={this.handleChange}></input>
+                        <input class="messageInput" type="text" placeholder="Write a message..." name="messageText" onChange={this.handleChange} value={this.state.messageText} onKeyDown={this.handleKeyPress}></input>
                         <IconButton variant="send" onSend={this.handleButtonClick}/>
                         <div style={{ float:"left", clear: "both" }}
                         ref={(el) => { this.messagesEnd = el; }}>
