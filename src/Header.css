@@ -23,7 +23,8 @@ box-sizing: border-box;
 display: flex;
 border-bottom: 1px solid;
 border-color: #d9d9d9;
-flex: 0 0 70px;
+/*flex: 0 0 70px;*/
+flex: 0 0 min-content;
 padding-left: 23px;
 padding-right: 23px;
 }
@@ -31,10 +32,14 @@ padding-right: 23px;
 .menu {
     box-sizing: border-box;
     display: flex;
-    flex-direction: row;
+    /*flex-direction: row;*/
     align-items: center;
+    flex-direction: column;
+    /*align-items: stretch;*/
     justify-content: space-between;
     width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .logo {
@@ -43,6 +48,14 @@ padding-right: 23px;
     /* width: 275px; */
     align-items: center;
     gap: 8px;
+    margin-top: 5px;
+    margin-bottom: 7px;
+    /*flex-direction: column;*/
+}
+
+.logo img {
+    max-width: 100%; /* Make the image responsive */
+    height: auto;    /* Maintain aspect ratio */
 }
 
 .logoTextWrapper {
@@ -84,6 +97,8 @@ line-height: 20px; /* 83.333% */
     flex-direction: row;
     align-items: center;
     gap: 23px;
+    margin-top: 8px;
+    margin-bottom: 5px;
 }
 
 .sublease {
@@ -207,4 +222,16 @@ font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: 24px; /* 150% */
+}
+
+@media (min-width: 768px) {
+    .menu {
+        flex-direction: row; /* Reset to row for larger screens */
+        align-items: center; /* Align items horizontally for larger screens */
+    }
+
+    .logo {
+        flex-direction: row; /* Reset to row for larger screens */
+        gap: 0; /* Remove the gap for larger screens */
+    }
 }

@@ -1,6 +1,7 @@
 .apartmentTypeButton {
     cursor: pointer;
     height: 20px;
+    width: fit-content;
     padding: 7px 10px;
     font-size: smaller;
     font-weight: 500;
@@ -18,4 +19,17 @@
     background-color : #005999;
     color: #ffffff;
     cursor: auto;
+}
+
+@media (min-width: 768px) {
+    .apartmentTypeButton {
+        cursor: pointer;
+        height: 20px;
+        padding: 7px 10px;
+        font-size: smaller;
+        font-weight: 500;
+        color: #005999;
+        border: 1px solid #005999;
+        border-radius: 25px;
+    }
 }

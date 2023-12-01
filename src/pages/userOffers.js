@@ -82,33 +82,82 @@ class UserOffers extends Component {
       return (
           <>
           <Header className="Header" showBack={true}/> 
-          <div className="frontPageMainContainer"> 
-            <div className="wrapCardContainer">
-                <div className="cardContainer">
-                { contentOf ? (
-                    contentOf.map((object) => {
-                        return (
-                            <OfferCard
-                            key={object.offerId}
-                            monthlyPrice={object.monthlyPrice}
-                            addressArea={object.area}
-                            addressStreet={object.address}
-                            type={object.apartmentType}
-                            floorArea={object.apartmentFloorArea}
-                            startDate={object.startDate}
-                            created={object.createdTime}
-                            offerID={object.offerId}
-                            deleteOffer={true}
-                            onDelete={onDelete}
-                            />)})
-                        )
-                        : (<></>)
-                }    
-                </div>       
-            </div>
-            <div className="pagination">
-                <Pagination defaultCurrent={1} total={this.state.totalElements} pageSize={this.state.size} onChange={onPageChange} />
-            </div>
+          <div className="frontPageMainContainer">
+              {
+                  contentOf && contentOf.length > 0 ? (
+                      <div className="wrapCardContainer">
+                          <div className="cardContainer">
+                              { contentOf && contentOf.length > 0 ? (
+                                      contentOf.map((object) => {
+                                          return (
+                                              <OfferCard
+                                                  key={object.offerId}
+                                                  monthlyPrice={object.monthlyPrice}
+                                                  addressArea={object.area}
+                                                  addressStreet={object.address}
+                                                  type={object.apartmentType}
+                                                  floorArea={object.apartmentFloorArea}
+                                                  startDate={object.startDate}
+                                                  created={object.createdTime}
+                                                  offerID={object.offerId}
+                                                  deleteOffer={true}
+                                                  onDelete={onDelete}
+                                              />)})
+                                  )
+                                  : (
+                                      <>
+                                      </>
+                                      // <div className="emptyOfferContainer">
+                                      //     <h1 style={{color: '#FF3377'}}>You have not have any offer yet!</h1>
+                                      // </div>
+                                  )
+                              }
+                          </div>
+                      </div>
+                  ) : (
+                      <div className="emptyOfferContainer">
+                          <h1 >You have not have any offer yet!</h1>
+                          <a style={{color: '#FF3377'}} href="/create">Create an offer</a>
+                      </div>
+                  )
+              }
+            {/*<div className="wrapCardContainer">*/}
+            {/*    <div className="cardContainer">*/}
+            {/*    { contentOf && contentOf.length > 0 ? (*/}
+            {/*        contentOf.map((object) => {*/}
+            {/*            return (*/}
+            {/*                <OfferCard*/}
+            {/*                key={object.offerId}*/}
+            {/*                monthlyPrice={object.monthlyPrice}*/}
+            {/*                addressArea={object.area}*/}
+            {/*                addressStreet={object.address}*/}
+            {/*                type={object.apartmentType}*/}
+            {/*                floorArea={object.apartmentFloorArea}*/}
+            {/*                startDate={object.startDate}*/}
+            {/*                created={object.createdTime}*/}
+            {/*                offerID={object.offerId}*/}
+            {/*                deleteOffer={true}*/}
+            {/*                onDelete={onDelete}*/}
+            {/*                />)})*/}
+            {/*            )*/}
+            {/*            : (*/}
+            {/*                <div className="emptyOfferContainer">*/}
+            {/*                    <h1 style={{color: '#FF3377'}}>You have not have any offer yet!</h1>*/}
+            {/*                </div>*/}
+            {/*            )*/}
+            {/*    }    */}
+            {/*    </div>       */}
+            {/*</div>*/}
+              {
+                  contentOf && contentOf.left > 0 ? (
+                      <div className="pagination">
+                          <Pagination defaultCurrent={1} total={this.state.totalElements} pageSize={this.state.size} onChange={onPageChange} />
+                      </div>
+                  ) : (
+                      <></>
+                  )
+              }
+
           </div>
         </>
         );

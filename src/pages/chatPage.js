@@ -41,27 +41,47 @@ function formatDate(dateToFormat) {
 }
 
 class ChatMessage extends Component {
+    onIconClick = () => {
+        window.location.replace("/profile/" + this.props.sender)
+    }
     render() {
         let userMessage = false;
         if(this.props.sender == JSON.parse(localStorage.getItem("user")).username){
             userMessage = true;
         }
+
       return (
         <>
             <div class={userMessage? "chatUserMessageContainer" : "chatOtherMessageContainer" }>
                 <div class="messageContent">
-                
-                    <div class="profileIcon">
-                        {this.props.sender.charAt(0)}
-                    </div>
+
+                    {userMessage
+                        ?
+                        <div className="selfProfileIcon" onClick={this.onIconClick}>
+                            {this.props.sender.charAt(0)}
+                        </div>
+                        :
+                        <div className="profileIcon" onClick={this.onIconClick}>
+                            {this.props.sender.charAt(0)}
+                        </div>
+                    }
+                    {/*<div class="profileIcon">*/}
+                    {/*    {this.props.sender.charAt(0)}*/}
+                    {/*</div>*/}
                     <div class="nameAndMessage">
                         <div class="nameAndDate">
-                            <div className="name">
-                                {userMessage?
-                                    "You"
-                                    : this.props.sender
-                                }
-                            </div>
+                            {/*<div className="name">*/}
+                            {/*    {userMessage?*/}
+                            {/*        "You"*/}
+                            {/*        : this.props.sender*/}
+                            {/*    }*/}
+                            {/*</div>*/}
+                            {userMessage
+                                ?
+                                <div class="selfName"> You </div>
+                                :
+                                <div className="name"> {this.props.sender} </div>
+                            }
                             <div class="timeStamp">
                                 {formatDate(this.props.sentTime)}
                             </div>
@@ -220,7 +240,21 @@ class Chat extends Component {
             console.log("message, response:", message)
             const response = await RequestPost("/api/chat/send", message)
             console.log("message, response:", message, response);
+            this.setState((prevState) => ({
+                ...prevState,
+                messageText: ''
+            }))
           }
+    };
+
+    handleKeyPress = async (event) => {
+        // Check if the pressed key is "Enter" (key code 13)
+        if (event.key === 'Enter') {
+            // Handle the "Enter" key press, for example, submit the form or perform an action
+            console.log('Enter key pressed');
+            await this.handleButtonClick();
+            // Add your logic here
+        }
     };
 
     render() {
@@ -253,7 +287,7 @@ class Chat extends Component {
                     </div>
                     <div class="chatInputContainer">
                         <IconButton variant="attachment" />
-                        <input class="messageInput" type="text" placeholder="Write a message..." name="messageText" onChange={this.handleChange}></input>
+                        <input class="messageInput" type="text" placeholder="Write a message..." name="messageText" onChange={this.handleChange} value={this.state.messageText} onKeyDown={this.handleKeyPress}></input>
                         <IconButton variant="send" onSend={this.handleButtonClick}/>
                     </div>
                 </div>

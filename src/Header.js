@@ -40,7 +40,8 @@ class Header extends Component {
                             {this.props.showBack ?
                                 <>
                                     <Button className="primaryButton" onClick={() => {
-                                        window.location.replace("/")
+                                        // window.location.replace("/")
+                                        window.history.back();
                                     }}>Back</Button>
                                 </>
                                 : <></>
@@ -68,7 +69,7 @@ class Header extends Component {
                                                 </div>
                                                 <div className="dropdown-content">
                                                     <Link className="profileLinks"
-                                                          to={`/profile/${currentUser.id}`}
+                                                          to={`/profile/${currentUser.username}`}
                                                     > Profile </Link>
                                                     <Link className="profileLinks"
                                                           to={`/offers/${currentUser.id}`}
