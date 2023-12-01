@@ -18,3 +18,9 @@ body::-webkit-scrollbar-thumb:hover {
     border-radius: 10px;
 } */
 
+.container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+

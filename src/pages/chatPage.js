@@ -110,7 +110,7 @@ const ChatSidebar = (props) => {
     };
 
     return (
-        <div>
+        <>
             {props.contacts.map((contact, index) => (
                 <ChatListElement 
                 key={index} 
@@ -120,7 +120,7 @@ const ChatSidebar = (props) => {
                 selected={index === selectedChat} 
                 onSelect={() => handleChatSelect(index, contact)} />
             ))}
-        </div>
+        </>
     );
 };
 
@@ -161,6 +161,10 @@ class Chat extends Component {
             console.log(contacts)
             this.setState({username, contacts})
         }
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom()
     }
 
     onMessageReceived = (message) => {
@@ -243,14 +247,14 @@ class Chat extends Component {
                             sentTime={message.sentTime} />
                             :<></>
                         ))}
+                        <div style={{ float:"left", clear: "both" }}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                        </div>
                     </div>
                     <div class="chatInputContainer">
                         <IconButton variant="attachment" />
                         <input class="messageInput" type="text" placeholder="Write a message..." name="messageText" onChange={this.handleChange}></input>
                         <IconButton variant="send" onSend={this.handleButtonClick}/>
-                        <div style={{ float:"left", clear: "both" }}
-                        ref={(el) => { this.messagesEnd = el; }}>
-                        </div>
                     </div>
                 </div>
             </div>
