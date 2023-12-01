@@ -6,6 +6,7 @@ import {
   notification,
 } from 'antd';
 import '../styles/login.css';
+import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class Login extends Component {
       password: "",
       error: "",
       auth: "",
+      loading: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,8 +33,61 @@ class Login extends Component {
     const user = {};
       user.username = this.state.username; 
       user.password = this.state.password;
-      const response = await RequestPost("/api/auth/login", user, "user", "/") 
-      this.setState({auth: response})
+      // try {
+      //   const response = await RequestPost("/api/auth/login", user, "user", "/")
+      //   this.setState({auth: response})
+      // } catch (error) {
+      //   console.log(error)
+      //   console.log(error.response.data.status.message)
+      //   notification.error({
+      //     message: 'Login Failed',
+      //     description: error.response.data.status.message
+      //   })
+      // }
+    if(!user.username || !user.password) {
+      notification.error({
+        message: 'Login Failed',
+        description: 'Username and password are required for login'
+      })
+    } else {
+      try {
+        this.setState((prevState) => ({
+          ...prevState,
+          loading: true,
+        }))
+        const response = await axios.post("https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/api/auth/login", user)
+        this.setState((prevState) => ({
+          ...prevState,
+          loading: false,
+        }))
+        console.log("response:",response);
+        if(response.status == "200" && response.data.status.code == "success" ){
+          localStorage.setItem(`auth`, true)
+          localStorage.setItem(`user`, JSON.stringify(response.data.data))
+          window.location.replace("/")
+          this.setState({auth: response.data.data})
+          // return response.data.data;
+        } else {
+          notification.error({
+            message: 'Login Failed',
+            description: response.data.status.message
+          })
+        }
+      } catch (error) {
+        this.setState((prevState) => ({
+          ...prevState,
+          loading: false,
+        }))
+        console.log(error)
+        console.log(error.response.data.status.message)
+        notification.error({
+          message: 'Login Failed',
+          description: error.response.data.status.message
+        })
+      }
+    }
+
+
   }
 
   render() {
@@ -52,7 +107,9 @@ class Login extends Component {
                 <input className="input" placeholder="Password" name="password" type="password"  value={this.state.password} onChange={this.handleChange} />
             </div>
             <div className="formElement loginButton">
-              <button  className="button" type="submit">Log In</button>
+              <button  className="button" type="submit" disabled={this.state.loading}>
+                {this.state.loading ? 'Logging in...' : 'Login'}
+              </button>
             </div>
             <div className="formElement linkToRegistration">
               <Link className="link" to='/register'>Not registered yet?</Link>

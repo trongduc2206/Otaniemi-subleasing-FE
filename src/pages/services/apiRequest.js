@@ -43,11 +43,18 @@ export async function RequestPost(path, value, responseValueName, secondPath) {
                     window.location.replace(`${secondPath}`)
                 }
                 return response.data.data;
+            } else {
+                notification.error({
+                    message: 'Login Failed',
+                    description: response.data.status.message
+                })
             }
         } catch (error) {
+            console.log(error)
+            console.log(error.response.data.status.message)
             notification.error({
                 message: 'Login Failed',
-                description: error.response
+                description: error.response.data.status.message
             })
         }
 }
