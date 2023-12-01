@@ -108,6 +108,7 @@
     display: flex;
     gap: 11px;
     width: auto;
+    flex-direction: column;
 }
 
 .rentSpecification {
@@ -218,4 +219,12 @@ line-height: 24px; /* 150% */
     outline: 3px solid #b3dfff;
     background-color: #e2e2e2;
 
+}
+@media (min-width: 768px) {
+    .apartmentTypeSelectionButtons {
+        display: flex;
+        gap: 11px;
+        width: auto;
+        flex-direction: row;
+    }
 }

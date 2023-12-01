@@ -110,6 +110,7 @@
 .radioButton {
     cursor: pointer;
     height: 20px;
+    width: fit-content;
     padding: 7px 10px;
     font-size: smaller;
     font-weight: 500;
