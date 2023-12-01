@@ -155,9 +155,9 @@ class CreateOffer extends Component {
             laundry = 1
           } else { laundry = 0}
           await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit}) 
-          await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})  
-          await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})  
-          await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})   
+          // await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})
+          // await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})
+          // await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})
           window.location.replace(`/create/published`)
       };
       return (
