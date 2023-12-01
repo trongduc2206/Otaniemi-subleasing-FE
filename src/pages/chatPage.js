@@ -41,27 +41,47 @@ function formatDate(dateToFormat) {
 }
 
 class ChatMessage extends Component {
+    onIconClick = () => {
+        window.location.replace("/profile/" + this.props.sender)
+    }
     render() {
         let userMessage = false;
         if(this.props.sender == JSON.parse(localStorage.getItem("user")).username){
             userMessage = true;
         }
+
       return (
         <>
             <div class={userMessage? "chatUserMessageContainer" : "chatOtherMessageContainer" }>
                 <div class="messageContent">
-                
-                    <div class="profileIcon">
-                        {this.props.sender.charAt(0)}
-                    </div>
+
+                    {userMessage
+                        ?
+                        <div className="selfProfileIcon" onClick={this.onIconClick}>
+                            {this.props.sender.charAt(0)}
+                        </div>
+                        :
+                        <div className="profileIcon" onClick={this.onIconClick}>
+                            {this.props.sender.charAt(0)}
+                        </div>
+                    }
+                    {/*<div class="profileIcon">*/}
+                    {/*    {this.props.sender.charAt(0)}*/}
+                    {/*</div>*/}
                     <div class="nameAndMessage">
                         <div class="nameAndDate">
-                            <div className="name">
-                                {userMessage?
-                                    "You"
-                                    : this.props.sender
-                                }
-                            </div>
+                            {/*<div className="name">*/}
+                            {/*    {userMessage?*/}
+                            {/*        "You"*/}
+                            {/*        : this.props.sender*/}
+                            {/*    }*/}
+                            {/*</div>*/}
+                            {userMessage
+                                ?
+                                <div class="selfName"> You </div>
+                                :
+                                <div className="name"> {this.props.sender} </div>
+                            }
                             <div class="timeStamp">
                                 {formatDate(this.props.sentTime)}
                             </div>
