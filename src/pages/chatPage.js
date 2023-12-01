@@ -57,11 +57,11 @@ class ChatMessage extends Component {
 
                     {userMessage
                         ?
-                        <div className="selfProfileIcon" onClick={this.onIconClick}>
+                        <div className="selfProfileIconChat" onClick={this.onIconClick}>
                             {this.props.sender.charAt(0)}
                         </div>
                         :
-                        <div className="profileIcon" onClick={this.onIconClick}>
+                        <div className="profileIconChat" onClick={this.onIconClick}>
                             {this.props.sender.charAt(0)}
                         </div>
                     }
