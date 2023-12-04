@@ -264,7 +264,7 @@ class CreateOffer extends Component {
                 </div>
               <div className="ctaButtons">
                   <Button className="primaryButtonWide" onClick={onSubmit}>Publish</Button>
-                  <Button className="primaryButtonWide" onClick={onSubmitFake}>Publish</Button>
+                  {/* <Button className="primaryButtonWide" onClick={onSubmitFake}>Publish</Button> */}
               </div>
             </div>
           </div>
