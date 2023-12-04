@@ -5,12 +5,11 @@ import {RequestGet, RequestPost} from './services/apiRequest.js';
 import axios from "axios";
 import Header from "../Header";
 import IconButton from "./createOffer/iconButton";
-import mainImage from '../styles/img//image1.png';
+import mainImage from '../styles/img/offersImg/image1.png';
 import '../styles/chatMessage.css';
 import '../styles/chatListElement.css';
 import '../styles/chatPage.css';
 
-var messageCount = 5;
 function formatDate(dateToFormat) {
     // Split the input date into parts (month and day)
         const date = new Date(dateToFormat);

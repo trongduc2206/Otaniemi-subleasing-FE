@@ -3,7 +3,7 @@ import Header from "../Header";
 import { useParams } from "react-router";
 import {RequestGet, RequestPost} from './services/apiRequest.js';
 import '../styles/itemPage.css';
-import mainImage from '../styles/img/image 4.png';
+import mainImage from '../styles/img/offersImg/image4.png';
 import avatar from "../styles/img/avatar.svg";
 import { Button } from "antd";
 import { Link } from 'react-router-dom';

@@ -8,6 +8,33 @@ import DefaultCheckBox from "./defaultCheckBox";
 import DefaultRadioButtonGroup from "./defaultRadioButtonGroup";
 import '../../styles/createOffer.css';
 
+function getRandomNumber(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+const offerArea = ["Maininkitie 4", 
+                  "Servin maijan tie 8",
+                  "Servin maijan tie 6",
+                  "Servin maijan tie 10",
+                  "Otakaari 18",
+                  "Otaranta 8",
+                  "Rantaharju 10",
+                  "Jämeräntaival 11",
+                  "Karstulantie 8",
+                  "Matinniitynkuja 4",
+                  "Tuuliniitty 1",
+                  "Nuottakuninkaantie 5",
+                  "Pronssitie 2",
+                  "Metsalinnureitti 1"
+                  ]
+const offerDescription = ["Nice spacious apartment, The room is equipped with everything from kitchen supplies to work desk utilities. A kitchen and two washrooms are shared with two other rooms.",
+                      "The apartment is of private housing and It is in a two room apartment (with a living room) and only my room is available (only one person allowed). The kitchen and Bathroom is well spacious. There are vaccum cleaner and microwave available also which you can use. The rent will be counted from the day you move in. Dm me for more info.",
+                      "The room is fully furnished, and you'll share a fully equipped kitchen and bathroom (we have our own washing machine!) with my wonderful housemate ✨ (female only)",
+                      "Hi! Our lovely flatmate has finished his eramus so we are looking for a new flatmate. It's a furnished room in a semidetached in a international LGBTQI+friendly and supercool 3-room house with terrace, sauna, big livingroom, two bathrooms, big common area and all cookware.",
+                      "The apartment faces a serene view of trees, the house is usually quiet and peaceful. If it sounds like a place where you would like to live, kindly dm.",
+                      "'m looking for a responsible tenant who appreciates plants (we have lots!). If interested, send me a message, and we can discuss further!",
+                      "There’s a kitchen with all supplies, a balcony and two bathrooms and since it’s HOAS you will get access to laundry room, sauna with rooftop terrace and a club room. ",
+                      "About the house. The kitchen has all required elements: from plates, forks, microwave, coffeemaker, grill, juicer, dishwasher and everything you might need. No need to bring anything. The living room has a big sofa and TV. The house has a small garden, our own sauna and a laundry room with washing-drying machine as well as a storage space. The room is a bit small but it has a big closet, otherwise it’s unfurnished (around 9sqm), but the common space is big."]
 const RadioButton = (props) =>{
   const [isActive, setIsActive] = useState(null);
   const [navClass, setNavClass] = useState("radioButton");
@@ -155,11 +182,26 @@ class CreateOffer extends Component {
             laundry = 1
           } else { laundry = 0}
           await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit}) 
-          // await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})
-          // await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})
-          // await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit})
-          window.location.replace(`/create/published`)
+          // window.location.replace(`/create/published`)
       };
+      const onSubmitFake = async (event) => {
+        event.preventDefault();
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = user.id;
+        const areaNumber = getRandomNumber(1, 14)
+        const area = offerArea[areaNumber];
+        const monthlyPrice = getRandomNumber(150, 450)
+        const apartmentType = getRandomNumber(0,3)
+        const apartmentFloorArea = getRandomNumber(16, 44)
+        const descriptionNumber = getRandomNumber(1, 8)
+        const description = offerDescription[descriptionNumber]
+        const postCode = `${getRandomNumber(0,9)}${getRandomNumber(0,9)}${getRandomNumber(0,9)}${getRandomNumber(0,9)}${getRandomNumber(0,9)}`
+        const startDate = "2023-12-01";
+        const endDate = "2024-05-20";
+        console.log("area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode, furnished, laundry, deposit:",area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode )
+        
+        await this.handleApiRequest("POST","/api/offer/create", {userId, area, monthlyPrice, apartmentType, startDate, endDate, apartmentFloorArea, description, postCode}) 
+    };
       return (
         <>
           <Header showBack={true}/>
@@ -222,6 +264,7 @@ class CreateOffer extends Component {
                 </div>
               <div className="ctaButtons">
                   <Button className="primaryButtonWide" onClick={onSubmit}>Publish</Button>
+                  <Button className="primaryButtonWide" onClick={onSubmitFake}>Publish</Button>
               </div>
             </div>
           </div>

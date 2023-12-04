@@ -250,6 +250,8 @@ line-height: 30px; /* 150% */
 }
 
 .offerCardImage{
+    height: 200px;
+    width: 300px;
     cursor: pointer;
 }
 .offerContent {

@@ -13,6 +13,10 @@ import {
   } from 'antd';
 import '../styles/offers.css';
 
+function getRandomImageFileName(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 class UserOffers extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +24,7 @@ class UserOffers extends Component {
             user: "",
             isModalOpen: false,
             page: 0,
-            size: 25,
+            size: 16,
             content: [],
             totalElements: 1,
             filters: {
@@ -100,6 +104,7 @@ class UserOffers extends Component {
                                                   startDate={object.startDate}
                                                   created={object.createdTime}
                                                   offerID={object.offerId}
+                                                  offerImg={getRandomImageFileName(1,19)}
                                                   deleteOffer={true}
                                                   onDelete={onDelete}
                                               />)})

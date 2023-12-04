@@ -3,9 +3,28 @@ import { Button } from "antd";
 import {
     DeleteOutlined
   } from "@ant-design/icons";
-import mainImage from '../styles/img//image1.png';
+import mainImage1 from '../styles/img/offersImg/image1.png';
+import mainImage2 from '../styles/img/offersImg/image2.png';
+import mainImage3 from '../styles/img/offersImg/image3.png';
+import mainImage4 from '../styles/img/offersImg/image4.png';
+import mainImage5 from '../styles/img/offersImg/image5.png';
+import mainImage6 from '../styles/img/offersImg/image6.png';
+import mainImage7 from '../styles/img/offersImg/image7.png';
+import mainImage8 from '../styles/img/offersImg/image8.png';
+import mainImage9 from '../styles/img/offersImg/image9.png';
+import mainImage10 from '../styles/img/offersImg/image10.png';
+import mainImage11 from '../styles/img/offersImg/image11.png';
+import mainImage12 from '../styles/img/offersImg/image12.png';
+import mainImage13 from '../styles/img/offersImg/image13.png';
+import mainImage14 from '../styles/img/offersImg/image14.png';
+import mainImage15 from '../styles/img/offersImg/image15.png';
+import mainImage16 from '../styles/img/offersImg/image16.png';
+import mainImage17 from '../styles/img/offersImg/image17.png';
+import mainImage18 from '../styles/img/offersImg/image18.png';
+import mainImage19 from '../styles/img/offersImg/image19.png';
 import clockIcon from '../styles/img/clock.svg';
 import { Link } from 'react-router-dom';
+
 
 function formatRelativeTime(timestamp) {
     const currentTime = new Date();
@@ -86,7 +105,7 @@ function formatDate(dateToFormat) {
 }
 
 const OfferCard = (props) => {
-    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created, offerID, deleteOffer, onDelete, } = props;
+    const {monthlyPrice, addressStreet, addressArea, type, floorArea, startDate, created, offerID, deleteOffer, onDelete, offerImg } = props;
     const [apartmentPrice, setApartmentPrice] = useState(props.monthlyPrice);
     const [apartmentArea, setApartmentArea] = useState(props.addressArea);
     const [apartmentStreet, setApartmentStreet] = useState(props.addressStreet);
@@ -94,11 +113,33 @@ const OfferCard = (props) => {
     const [apartmentFloorArea, setApartmentFloorArea] = useState(props.floorArea);
     const [apartmentStartDate, setApartmentStartDate] = useState(props.startDate);
     const [createdTime, setCreatedTime] = useState(props.created);
+    const [apartmentImg, setApartmentImg] = useState(
+        [0,
+        mainImage1, 
+        mainImage2, 
+        mainImage3,
+        mainImage4,
+        mainImage5,
+        mainImage6,
+        mainImage7,
+        mainImage8,
+        mainImage9,
+        mainImage10,
+        mainImage11,
+        mainImage12,
+        mainImage13,
+        mainImage14,
+        mainImage15,
+        mainImage16,
+        mainImage17,
+        mainImage18,
+        mainImage19,
+        ]);
 
     useEffect(() => {
         setApartmentStartDate(formatDate(startDate));
       }, [startDate]);
-    console.log("OfferCard offerId :",offerID);
+    console.log("OfferCard offerId, offerImg:",offerID, apartmentImg, offerImg, mainImage1);
 
     const deleteApartmentOffer = async () => {
         await onDelete({offerID});
@@ -109,7 +150,7 @@ const OfferCard = (props) => {
     };
     return (
         <div className="Offer-Card" >
-                <img className="offerCardImage" src={mainImage} onClick={openOffer}/>
+                <img className="offerCardImage" src={apartmentImg[offerImg]} alt={`Apartment Image`} onClick={openOffer}/>
                 <div className="offerContent">
                     <div>
                         <div>
