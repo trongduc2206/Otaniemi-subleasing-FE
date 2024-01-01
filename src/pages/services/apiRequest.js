@@ -4,7 +4,8 @@ import {
     notification,
   } from 'antd';
 
-const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
+// const baseURL = "https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io";
+const baseURL = "https://subleasing-be.onrender.com";
 
 export async function RequestGet(path, value) {
     console.log(path, value)

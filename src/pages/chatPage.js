@@ -144,7 +144,8 @@ const ChatSidebar = (props) => {
 };
 
 class Chat extends Component {
-    webSocketEndPoint = 'https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/ws';
+    // webSocketEndPoint = 'https://subleasing-be.victoriousdesert-96ff8f6f.northeurope.azurecontainerapps.io/ws';
+    webSocketEndPoint = 'https://subleasing-be.onrender.com/ws';
     stompClient;
     constructor(props) {
         super(props);
